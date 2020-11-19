@@ -1,5 +1,6 @@
 /* 레이아웃 */
 #header {background: url(../img/header_bg.jpg) repeat-x center top;}
+#nav {background-color: #f6fdff;}
 
 /* 컨테이너 */
 .container {width: 1200px; margin: 0 auto; /* background: rgba(0,0,0,0.3);*/ }
@@ -81,6 +82,26 @@
     0 0 0 3px rgba(75,154,191,0.9) inset,
     0 0 0 100px rgba(0,0,0,0.1) inset;
 }
+
+/* 전체메뉴 */
+.nav {overflow: hidden;}
+.nav > div {float: left; width: 40%;}
+.nav > div:last-child {width: 20%;}
+.nav > div ol {overflow: hidden;}
+.nav > div li {float: left; width: 50%; position: relative; padding-left: 8px; box-sizing: border-box;}
+.nav > div:last-child li {width: 100%;}
+.nav > div li::before {
+    content: '';
+    width: 3px; height: 3px;
+    background-color: #25a2d0;
+    border-radius: 50%;
+    position: absolute; left: 0; top: 6px;
+
+}
+.nav > div h3 {font-size: 18px; color: #25a2d0; font-weight: bold; margin-bottom: 4px;} 
+
+
+
 
 /* mediaquery */
 @media (max-width: 1220px) {
