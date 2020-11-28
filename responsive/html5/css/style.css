@@ -212,6 +212,18 @@ body {background: url(../img/header_bg.jpg) repeat-x center top;}
     font-size: 10px;
 }
 
+/* 블로그1 */
+.blog1 img {width: 100%;}
+.blog1 .img-retina {display: none;}
+/* 화면의 비율에 따라 이미지를 반응형 */
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+        only screen and (min-device-pixel-ratio: 1.5),
+        only screen and (min-resolution: 1.5dppx) {
+        .blog1 .img-retina {display: initial;}
+        .blog1 .img-normal {display: none;}
+}
+
+
 /* mediaquery */
 /* 화면 너비 0 ~ 1220px */
 @media (max-width: 1220px) {
