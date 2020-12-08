@@ -334,6 +334,29 @@ position: absolute; left: 0; top: 2px;}
 .footer li:first-child:before {width: 0;}
 .footer address {padding-top: 15px;}
 
+/* 사이트 이펙트1 */
+.side1 {position: relative; perspective: 600px; display: block;} /* perspective:원근점 */
+.side1 .front {
+    transform-style: preserve-3d; /* 3D 작업 설정 */
+    transform: rotateY(0deg);
+    transition: all 0.5s ease-in-out;
+    backface-visibility: hidden; /* 뒷면일때 안보이기*/
+}
+.side1 .back {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%; z-index: -1; /* 뒷면으로 z-index:-1 안보이게 */
+    transform-style: preserve-3d;
+    color: #fff;
+    background: #4038dc;
+    transform: rotateY(-180deg); /* 뒤에서 180도 돌아있기 */
+    transition: all 0.5s ease-in-out;
+    backface-visibility: hidden;
+}
+.side1 .back i {position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 60px;}
+/* 180도 회전 */
+.side1:hover .front {transform: rotateY(180deg);}
+.side1:hover .back {transform: rotateY(0deg); z-index: 1;}
+
 /* mediaquery */
 /* 화면 너비 0 ~ 1220px */
 @media (max-width: 1220px) {
