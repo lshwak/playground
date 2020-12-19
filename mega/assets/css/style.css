@@ -82,7 +82,7 @@
     .header h1 em {padding: 11px 8px 5px 0;}
     .header h1 strong {top: 19px;}
 
-    .swiper-button-prev, .swipter-button-next {display: none;}
+    .swiper-button-prev, .swiper-button-next {display: none;}
 }
 
 @media (max-width: 1024px) {
@@ -96,7 +96,11 @@
 }
 
 @media (max-width: 960px) {
-    
+    .slider {height: 500px;}
+    .slider .swiper-slide h2 {margin-top: 170px; font-size: 37px; line-height: 45px;}
+    .slider .swiper-slide h2:after {bottom: -15px;}
+    .slider .swiper-slide h2 em {font-size: 34px;}
+    .slider .swiper-slide p {font-size: 16px; padding-top: 35px;}
 }
 
 @media (max-width: 768px) {
@@ -104,6 +108,18 @@
     #mNav {right: 6px;}
     .header h1 {text-align: left;}
     .header h1 strong {display: none;}
+}
+
+@media (max-width: 600px) {
+    .slider {height: 400px;}
+    .slider .swiper-slide h2 {margin-top: 140px; font-size: 24px; line-height: 30px;}
+    .slider .swiper-slide h2:after {bottom: -5px;}
+    .slider .swiper-slide h2 em {font-size: 20px;}
+    .slider .swiper-slide p {font-size: 14px; padding-top: 25px;}
+    .banner_manu {top: 16px;}
+    .banner_manu .bm_right li.white a {font-size: 14px; padding: 3px 5px 5px 5px; color: #fff; background: rgba(0,0,0,0.6); border-color: #fff;}
+    .banner_manu .bm_right li.purple a {font-size: 14px; padding: 3px 5px 5px 5px; color: #fff; background: rgba(0,0,0,0.6); border-color: #fff;}
+    .swiper-pagination-bullet {width: 13px !important; height: 13px !important;}
 }
 
 @media (max-width: 480px) {
