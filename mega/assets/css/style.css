@@ -69,9 +69,21 @@
 .slider .swiper-slide h2 em {display: block; font-size: 59px; font-weight: 100;}
 .slider .swiper-slide p {font-size: 27px; color: #fff; padding-top: 55px;}
 
-
-
-
+/* 무비 */
+.movie {}
+.movie_title {}
+.movie_title ul {}
+.movie_title li {}
+.movie_chart {}
+.movie_chart > div {}
+.movie_chart > div > div {}
+.movie_chart > div > div .poster {}
+.movie_chart > div > div .poster .rank {}
+.movie_chart > div > div .poster .mx {}
+.movie_chart > div > div .infor {}
+.movie_chart > div > div .infor h3 {}
+.movie_chart > div > div .infor h3 strong {}
+.movie_chart > div > div .infor h3 span {}
 
 
 /* 미디어 쿼리 */
