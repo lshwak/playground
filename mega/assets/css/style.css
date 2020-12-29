@@ -7,6 +7,7 @@
 #movie {background-color: #f8f8f8;}
 #event {}
 #opening {margin: 17px 0; background: url(../img/bg01.jpg) no-repeat center top; background-size: cover;}
+#new {}
 
 /* 가운데 영역 */ 
 .container {position: relative; width: 1280px; margin: 0 auto; background: rgba(0,0,0,0);}
@@ -123,6 +124,15 @@
 .opening .open_box > div p {font-size: 23px; color: #fff; font-weight: 700; padding: 6% 0 10% 0;}
 .opening .open_box > div em {display: block; font-weight: bold;}
 .opening .open_box > div strong {display: block; font-weight: bold;}
+
+/* 새로운 영화 */
+.new {position: relative; padding: 100px 0;}
+.new h2 {font-size: 30px; font-weight: 500; margin-bottom: 20px;}
+.new .new_left {position: relative; margin-right: 423px; height: 500px; background: url(../img/new01.jpg) center center; background-size: cover;}
+.new .new_left .play {position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 120px; height: 120px;}
+.new .new_left .play .st0 {fill: #fff; opacity: 0.3;}
+.new .new_left .play .st1 {fill: #fff;}
+.new .new_right {position: absolute; right: 0; top: 165px; width: 400px; height: 500px; background: #f0f0f0;}
 
 
 /* 미디어 쿼리 */
