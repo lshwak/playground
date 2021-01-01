@@ -192,6 +192,9 @@
     .opening {padding: 50px 0;}
     .opening .open_box {display: none;}
     .opening .desc {background: none; font-size: 25px;}
+
+    .new .new_left {margin-right: 0; font-size: 25px;}
+    .new .new_right {position: relative; top: 0; width: 100%; height: auto;}
 }
 
 @media (max-width: 768px) {
@@ -220,6 +223,11 @@
     .event .event_right {display: none;}
 
     #opening {margin: 0;}
+
+    #new .row {padding: 0 24px;}
+    .new {padding: 24px; background-color: #fff; margin-top: 24px;}
+    .new h2 {font-size: 24px; font-weight: 700; height: 27px; margin-bottom: 20px; padding-bottom: 10px;}
+    .new .new_right {padding: 24px;}
 }
 
 @media (max-width: 600px) {
@@ -260,6 +268,16 @@
     .opening h2 .grand {background-size: 300px; background-position: 0 -105px; width: 197px; height: 24px;}
     .opening .date {display: none;}
     .opening .desc {font-size: 16px; font-weight: 400; padding-bottom: 0;}
+
+    #new .row {padding: 0 8px;}
+    .new {padding: 16px; margin-top: 8px;}
+    .new h2 {font-size: 18px; margin-bottom: 0;}
+    .new .new_left {height: 300px;}
+    .new .new_right {padding: 17px;}
+    .new .new_right .title {font-size: 22px;}
+    .new .new_right .star {padding: 9px 0;}
+    .new .new_right .select .s1 {width: 100%; margin-right: 0; margin-bottom: 2%;}
+    .new .new_right .select .s2 {width: 100%;}
 }
 
 @media (max-width: 480px) {
