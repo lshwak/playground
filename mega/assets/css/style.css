@@ -177,6 +177,17 @@
 .notice ul li ul li dt .bar:after {content: ''; position: absolute; right: 4px; top: 5px; width: 1px; height: 10px; background: #999;}
 .notice ul li ul li dd {color: #777; padding-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 
+/* 할인카드 */
+.card {padding: 17px;}
+.card ul {}
+.card ul li {position: relative; border: 1px solid #d7d7d7; padding: 17px; margin-bottom: 17px; min-height: 102px; box-sizing: border-box;}
+.card ul li span {position: absolute; left: 17px; top: 17px;}
+.card ul li span img {width: 105px;}
+.card ul li strong {display: block; font-size: 18px; color: #777; padding-left: 120px;}
+.card ul li em {display: block; font-size: 14px; color: #777; font-weight: 300; padding-left: 120px;}
+
+
+
 
 /* 미디어 쿼리 */
 @media (max-width: 1290px) {
