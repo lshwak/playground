@@ -220,6 +220,15 @@
     .header h1 strong {left: 24px;}
     .banner_manu .bm_left ul {display: none;}
     .banner_manu .bm_right ul:first-child {display: none;}
+
+    .help article.help_box1 {width: 49%; margin-right: 2%;}
+    .help article.help_box2 {width: 40%; margin-right: 0;}
+    .help article.help_box3 {width: 100%; margin-top: 2%;}
+    .help article {height: auto;}
+    .service li {width: 25%; height: auto;}
+    .service li:nth-child(1) {border-bottom: 1px solid #d7d7d7;}
+    .service li:nth-child(2) {border-bottom: 1px solid #d7d7d7; border-right: 0;}
+    .service li a strong {display: block; padding-bottom: 10%;}
 }
 
 @media (max-width: 960px) {
@@ -271,6 +280,17 @@
     .new {padding: 24px; background-color: #fff; margin-top: 24px;}
     .new h2 {font-size: 24px; font-weight: 700; height: 27px; margin-bottom: 20px; padding-bottom: 10px;}
     .new .new_right {padding: 24px;}
+
+    #help .row {padding: 0 24px;}
+    .help {padding-bottom: 24px;}
+    .help article.help_box1 {padding: 24px; box-sizing: border-box; width: 100%; background: #fff; margin-right: 0; margin-top: 24px;}
+    .help article.help_box2 {padding: 24px; box-sizing: border-box; width: 100%; background: #fff; margin-right: 0; margin-top: 24px;}
+    .help article.help_box3 {width: 100%; background: #fff; margin-top: 0; margin-top: 24px;}
+    .help article.help_box1 h3 {font-size: 24px; font-weight: 700; height: 27px; margin-bottom: 20px; padding-bottom: 10px;}
+    .help article.help_box2 h3 {font-size: 24px; font-weight: 700; height: 27px; margin-bottom: 20px; padding-bottom: 10px;}
+    .help article.help_box3 h3 {display: none;}
+    .help article.help_box3 > div {height: auto;}
+    .service li {border: 0;}
 }
 
 @media (max-width: 600px) {
