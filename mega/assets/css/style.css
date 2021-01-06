@@ -341,6 +341,17 @@
     .new .new_right .star {padding: 9px 0;}
     .new .new_right .select .s1 {width: 100%; margin-right: 0; margin-bottom: 2%;}
     .new .new_right .select .s2 {width: 100%;}
+
+    #help .row {padding: 0 8px;}
+    .help article.help_box1 {margin-top: 8px; padding: 16px;}
+    .help article.help_box2 {margin-top: 8px; padding: 16px;}
+    .help article.help_box3 {margin-top: 8px;}
+    .help article.help_box1 h3 {font-size: 18px; margin-bottom: 0;}
+    .help article.help_box2 h3 {font-size: 18px; margin-bottom: 0;}
+    .card {padding: 8px;}
+    .service li {width: 50%;}
+    .service li:nth-child(1) {border-right: 1px solid #d7d7d7;}
+    .service li:nth-child(3) {border-right: 1px solid #d7d7d7;}
 }
 
 @media (max-width: 480px) {
@@ -349,6 +360,18 @@
 
 @media (max-width: 320px) {
     .movie_title li a {margin-right: 9px;}
+    .notice {padding: 8px;}
+    .notice ul li ul {left: 9px; top: 56px;}
+    .notice ul li ul li {padding: 8px;}
+    .notice ul li a {padding: 5px 10px;}
+    .help article > div {height: 287px;}
+    .card ul li {padding: 8px; margin-bottom: 8px; min-height: 90px;}
+    .card ul li span {left: 11px; top: 10px;}
+    .card ul li span img {width: 60px;}
+    .card ul li strong {padding-left: 75px; font-size: 14px;}
+    .card ul li em {padding-left: 75px;}
+    .service li a span {width: 70px; height: 70px;}
+    .service li a strong {font-size: 14px;}
 }
 
 
