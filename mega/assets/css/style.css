@@ -8,6 +8,8 @@
 #event {}
 #opening {margin: 17px 0; background: url(../img/bg01.jpg) no-repeat center top; background-size: cover;}
 #new {}
+#help {}
+#footer {}
 
 /* 가운데 영역 */ 
 .container {position: relative; width: 1280px; margin: 0 auto; background: rgba(0,0,0,0);}
@@ -196,8 +198,9 @@
 .service li:nth-child(2) {border-bottom: 0;}
 .service li:nth-child(3) {border-right: 0;}
 
-
-
+/* 푸터 */
+.footer_sns {}
+.footer_info {}
 
 
 
