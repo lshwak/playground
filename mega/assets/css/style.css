@@ -200,7 +200,7 @@
 
 /* 푸터 */
 .footer_sns {position: absolute; right: 17px; top: 33px; z-index: 1;}
-.footer_sns li {display: inline-block;}
+.footer_sns li {display: inline-block; margin: 0 2px;}
 .footer_sns li a {display: block; width: 36px; height: 36px;}
 .footer_sns li.s1 {background-position: 0 -375px;}
 .footer_sns li.s2 {background-position: -36px -375px;}
@@ -275,6 +275,11 @@
 
     .new .new_left {margin-right: 0; font-size: 25px;}
     .new .new_right {position: relative; top: 0; width: 100%; height: auto;}
+
+    .help {padding-bottom: 0;}
+    .footer_sns {position: static; text-align: center; background: #352c2c; padding-bottom: 15px;}
+    .footer_sns .tel {display: none;}
+    .footer_info {width: 100%; text-align: center;}
 }
 
 @media (max-width: 768px) {
@@ -319,6 +324,8 @@
     .help article.help_box3 h3 {display: none;}
     .help article.help_box3 > div {height: auto;}
     .service li {border: 0;}
+    .service li:nth-child(1) {border-bottom: 0;}
+    .service li:nth-child(2) {border-bottom: 0;}
 }
 
 @media (max-width: 600px) {
@@ -378,7 +385,8 @@
     .help article.help_box2 h3 {font-size: 18px; margin-bottom: 0;}
     .card {padding: 8px;}
     .service li {width: 50%;}
-    .service li:nth-child(1) {border-right: 1px solid #d7d7d7;}
+    .service li:nth-child(1) {border-right: 1px solid #d7d7d7; border-bottom: 1px solid #d7d7d7;}
+    .service li:nth-child(2) {border-bottom: 1px solid #d7d7d7;}
     .service li:nth-child(3) {border-right: 1px solid #d7d7d7;}
 }
 
