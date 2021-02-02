@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawing</title>
+    <style>
+        canvas {background: #eee;}
+    </style>
+</head>
+<body>
+    <h1>Drawing</h1>
+    <canvas class="canvas" width="1300" height="700">
+        이 브라우저는 캔버스를 지원하지 않습니다.
+    </canvas>
+    <script>
+        const canvas = document.querySelector('.canvas');
+        const context = canvas.getContext('2d');
+        let drawingMode; // true일 때만 그리기.
+        // 마우스 누르기
+        function downHandler() {
+            drawingMode = true;
+        }
+        // 마우스 떼기
+        function upHandler() {  
+            drawingMode = false;
+        }
+
+        function clickHandler(e) {
+            if (!drawingMode) return;
+
+            // console.log(e.clientX, e.clientY); // 해당 좌표는 캔버스가 아닌 브라우저 기준.
+            // console.log(e.layerX, e.layerY); // 캔버스기준 click좌표
+            context.beginPath();
+            context.arc(e.layerX, e.layerY, 10, 0, Math.PI * 2, false);
+            context.fill();
+        }
+        canvas.addEventListener('mousedown', downHandler);
+        canvas.addEventListener('mousemove', clickHandler);
+        canvas.addEventListener('mouseup', upHandler);
+    </script>
+</body>
+</html>
