@@ -21,6 +21,9 @@
             height: 40px;
             background: url(../images/ilbuni2.png)no-repeat 50% 50% / cover;
         }
+        .result-image {
+            position: absolute;
+        }
     </style>
 </head>
 <body>
@@ -35,11 +38,15 @@
         <button class="color-btn" data-type="color" data-color="blue"></button>
         <button class="image-btn" data-type="image"></button>
     </div>
+    <button class="save-btn">이미지 저장</button>
+    <div class="result-image"></div>
     <script>
         // const: 상수 , let: 변수 (var만 쓸거면 var만 쓰기)
         const canvas = document.querySelector('.canvas');
         const context = canvas.getContext('2d');
         const control = document.querySelector('.control');
+        const saveBtn = document.querySelector('.save-btn');
+        const resultImage = document.querySelector('.result-image');
         let drawingMode; // true일 때만 그리기.
         let brush = 'color'; // 'color', 'image'
         let colorVal = 'black'; // 색상
@@ -81,10 +88,18 @@
             // console.log(brush);
         }
 
+        function createImage() {
+            const url = canvas.toDataURL('image/png');
+            const imgElem = new Image();
+            imgElem.src = url;
+            resultImage.appendChild(imgElem);
+        }
+        // addEventListener가 많으면 메모리 점유를 많이해서 페이지 성능의 악영향을 미칠 수 있다.
         canvas.addEventListener('mousedown', downHandler);
         canvas.addEventListener('mousemove', moveHandler);
         canvas.addEventListener('mouseup', upHandler);
         control.addEventListener('click', setColor);
+        saveBtn.addEventListener('click', createImage);
     </script>
 </body>
 </html>
