@@ -50,10 +50,12 @@
         imageData = ctx.getImageData(0, 0, 600, 400);
         leng = imageData.data.length / 4;
 
+        // console.log(imageData.data);
+
         for (let i = 0; i < leng; i++) {
           switch(colorValue) {
             case 'red':
-              imageData.data[i * 4 + 0] = 255;
+              imageData.data[i * 4 + 0] = 255; // 각 픽셀에 red에 해당하는 색상 정보만 접근
               break;
             case 'green':
               imageData.data[i * 4 + 1] = 255;

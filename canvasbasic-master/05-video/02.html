@@ -31,17 +31,17 @@
       videoElem.addEventListener('canplaythrough', render);
 
       const messages = [
-        {time: 1, message: '1 ㅋㅋ', x: 100, y: 100},
-        {time: 3, message: '2 ㅎㅎ', x: 300, y: 300},
-        {time: 5, message: '3 ㅊㅊ', x: 400, y: 200}
+        {time: 1, message: '1 ㅋㅋ', x: 100, y: 100}, // 1초가 넘어가면 좌표에 자막
+        {time: 3, message: '2 ㅎㅎ', x: 300, y: 300}, // 3초가 넘어가면 좌표에 자막
+        {time: 5, message: '3 ㅊㅊ', x: 400, y: 200} // 5초가 넘어가면 좌표에 자막
       ];
 
       function render() {
-        console.log(videoElem.currentTime);
+        console.log(videoElem.currentTime); // 비디오 재생시간 콘솔에 찍기.
         ctx.drawImage(videoElem, 0, 0, 600, 400);
         
         for (let i = 0; i < messages.length; i++) {
-          if (videoElem.currentTime > messages[i].time) {
+          if (videoElem.currentTime > messages[i].time) { // 현재 재생시간이 메시지 타임보다 커지면
             ctx.fillText(messages[i].message, messages[i].x, messages[i].y);
           }
         }
