@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interaction Canvas</title>
+    <style>
+        canvas{
+            background: #eee;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interaction</h1>
+    <canvas class="canvas" width="1400" height="700"></canvas>
+
+    <script>
+        const canvas = document.querySelector('.canvas');
+        const context = canvas.getContext('2d');
+
+        context.fillRect(200,200,100,100);
+
+        function clickHandler(e) {
+            // console.log(e.clientX, e.clientY); // 브라우저 기준 좌표
+            // console.log(e.layerX, e.layerY); // 캔버스영역 기준 좌표
+            const x = e.layerX;
+            const y = e.layerY;
+
+            if(x > 200 && x < 200 + 100 && y > 200 && y < 200 + 100) {
+                console.log('ok');
+            }
+        }
+
+        canvas.addEventListener('click', clickHandler);
+    </script>
+</body>
+</html>
