@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interaction Canvas</title>
+    <title>BreakerTest2</title>
     <style>
         canvas{
             background: #eee;
@@ -13,7 +13,7 @@
 </head>
 <body>
     <!-- 여러영역 랜덤배치, 해당 영역에 정확히 클릭됐는지를 판별 -->
-    <h1>Interaction02</h1>
+    <h1>BreakerTest2</h1>
     <canvas class="canvas" width="1400" height="700"></canvas>
 
     <script>
@@ -49,9 +49,9 @@
             let box;
             for(let i=0; i<boxes.length;i++) {
                 box = boxes[i];
-                box.x += box.speed;
-                if(box.x > canvas.width) { // box의 x좌표가 캔버스의 영역을 벗어나면
-                    box.x = -box.width; // 캔버스 영역을 벗어나면 다시 왼쪽부터 나오게. (값을 0보다 낮게 잡아 캔버스 밖에서 나타내기)
+                box.y += box.speed;
+                if(box.y > canvas.width) { // box의 x좌표가 캔버스의 영역을 벗어나면
+                    box.y = -box.width; // 캔버스 영역을 벗어나면 다시 왼쪽부터 나오게. (값을 0보다 낮게 잡아 캔버스 밖에서 나타내기)
                 }
                 box.draw();
             }
