@@ -26,6 +26,7 @@
         let selectedBox; // 클릭된 box (값을 계속 바꿔야 하기때문에 const가 아닌 let)
         let oX; // = window.innerWidth * 0.5; // window 전역객체는 생략가능
         let oY; // = window.innerHeight * 0.5; // 캔버스의 중심점을 oX, oY로 지정.
+        let step; // 애플리케이션의 상태(단계)를 저장 1~4.
 
         context.font = 'bold 30px sans-serif'; 
 
@@ -51,23 +52,52 @@
         function render() {
             context.clearRect(0,0,canvas.width, canvas.height); // box가 움직이는 흔적 지워주기
             let box;
+
+            // 기본값은 그리는것 (case별로 동작을 나누기.)
             for(let i=0; i<boxes.length;i++) {
                 box = boxes[i];
-                box.x += box.speed;
-                if(box.x > canvas.width) { // box의 x좌표가 캔버스의 영역을 벗어나면
-                    box.x = -box.width; // 캔버스 영역을 벗어나면 다시 왼쪽부터 나오게. (값을 0보다 낮게 잡아 캔버스 밖에서 나타내기)
-                }
+                // box.x += box.speed;
+                // if(box.x > canvas.width) { // box의 x좌표가 캔버스의 영역을 벗어나면
+                //     box.x = -box.width; // 캔버스 영역을 벗어나면 다시 왼쪽부터 나오게. (값을 0보다 낮게 잡아 캔버스 밖에서 나타내기)
+                // }
                 box.draw();
             }
 
-            panel.draw();
+            // step 값을 숫자값에 따라 1~4 단계 지정
+            switch (step) {
+                case 1: // case1일 때만 위치를 이동.
+                for(let i=0; i<boxes.length;i++) {
+                    box = boxes[i];
+                    box.x += box.speed;
+                    if(box.x > canvas.width) { // box의 x좌표가 캔버스의 영역을 벗어나면
+                        box.x = -box.width; // 캔버스 영역을 벗어나면 다시 왼쪽부터 나오게. (값을 0보다 낮게 잡아 캔버스 밖에서 나타내기)
+                    }
+                    // box.draw(); // 위에서 draw를 하기때문에 중복 막아주기.
+                }
+                break;
+
+                case 2:
+                    panel.scale += 0.02;
+                    panel.draw();
+                    if(panel.scale >= 1) {
+                        step = 3;
+                    }
+                break;
+
+                case 3:
+                    panel.draw();
+                    panel.showContent();
+                break;
+            }
+
             requestAnimationFrame(render);
         }
 
         let tempX, tempY, tempSpeed;
 
-        // 함수로 정리하여 초기화
+        // 초기화 함수로 정리
         function init() {
+            step = 1; // 처음상태를 step 1
             oX = canvas.width/2;
             oY = canvas.height/2;
             // box 열개 생성
@@ -101,8 +131,9 @@
                 }
             }
             if(selectedBox) { // selectBox가 있을 때만 나타내 에러(캔버스 빈영역 클릭 시 에러.) 막아주기.
-                console.log(selectedBox.index); // 선택된 마지막 박스번호 호출 (박스 클릭 후 캔버스 빈 영역을 클릭하면 클릭했던 박스번호가 계속 찍히는 에러)
-                selectedBox = null; // 빈 영역을 클릭 하면 selectedBox가 갱신이 되지 않아서 값을 비워주기.
+                // console.log(selectedBox.index); // 선택된 마지막 박스번호 호출 (박스 클릭 후 캔버스 빈 영역을 클릭하면 클릭했던 박스번호가 계속 찍히는 에러)
+                step = 2;
+                // selectedBox = null; // 빈 영역을 클릭 하면 selectedBox가 갱신이 되지 않아서 값을 비워주기.
             }
         });
 
