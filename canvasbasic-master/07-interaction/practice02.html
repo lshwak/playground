@@ -15,8 +15,11 @@
     <!-- 여러영역 랜덤배치, 해당 영역에 정확히 클릭됐는지를 판별 -->
     <h1>Interaction02</h1>
     <canvas class="canvas" width="1400" height="700"></canvas>
+    
+    <script src="utils.js"></script>
     <script src="Box.js"></script>
     <script src="Panels.js"></script>
+    
     <script>
         const canvas = document.querySelector('.canvas');
         const context = canvas.getContext('2d');
@@ -27,6 +30,7 @@
         let oX; // = window.innerWidth * 0.5; // window 전역객체는 생략가능
         let oY; // = window.innerHeight * 0.5; // 캔버스의 중심점을 oX, oY로 지정.
         let step; // 애플리케이션의 상태(단계)를 저장 1~4.
+        let rafId; // requestAnimationFrame
 
         context.font = 'bold 30px sans-serif'; 
 
@@ -77,20 +81,30 @@
                 break;
 
                 case 2:
-                    panel.scale += 0.02;
+                    // panel.scale += 0.02; // panel이 등속도 커지면서 멈춤.
+                    // 현재크기 = 현재크기 + (목표크기 - 현재크기) * 0.1 // panel이 커지를 속도를 나눠 서서히 멈춤.
+                    panel.scale = panel.scale + (1 - panel.scale) * 0.1; 
+                    // 각도 = 스케일(0~1) * 720;
+                    panel.angle = panel.scale * 720; // scale이 0~1로 커지기 때문에 angle도 같이 엮여서 돈다.
                     panel.draw();
-                    if(panel.scale >= 1) {
+                    if(panel.scale >= 0.999) {
+                        panel.scale = 1;
                         step = 3;
                     }
+
                 break;
 
                 case 3:
                     panel.draw();
-                    panel.showContent();
                 break;
             }
+            // console.log('lander!');
 
-            requestAnimationFrame(render);
+            rafId = requestAnimationFrame(render);
+            if (step === 3) {
+                panel.showContent();
+                cancelAnimationFrame(rafId);
+            }
         }
 
         let tempX, tempY, tempSpeed;
@@ -130,10 +144,15 @@
                     selectedBox = box; // 클릭된 박스 selectedBox에 넣기 (결국 마지막 박스가 들어간다.)
                 }
             }
-            if(selectedBox) { // selectBox가 있을 때만 나타내 에러(캔버스 빈영역 클릭 시 에러.) 막아주기.
+            if(step === 1 && selectedBox) { // selectBox가 있을 때만 나타내 에러(캔버스 빈영역 클릭 시 에러.) 막아주기.
                 // console.log(selectedBox.index); // 선택된 마지막 박스번호 호출 (박스 클릭 후 캔버스 빈 영역을 클릭하면 클릭했던 박스번호가 계속 찍히는 에러)
                 step = 2;
                 // selectedBox = null; // 빈 영역을 클릭 하면 selectedBox가 갱신이 되지 않아서 값을 비워주기.
+            } else if(step === 3) {
+                step = 1;
+                panel.scale = 0; // scale을 초기화하여 다시 실행했을 때 자연스럽게.
+                selectedBox = null;
+                render();
             }
         });
 
