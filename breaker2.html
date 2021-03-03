@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breaker test</title>
+    <style>
+        canvas{
+            background: #eee;
+        }
+    </style>
+</head>
+<body>
+    <canvas class="canvas" width="400" height="770"></canvas>
+    
+    <script>
+        const canvas = document.querySelector('.canvas');
+        const context = canvas.getContext('2d');
+        const boxes1 = [];
+        const boxes2 = [];
+        const boxes3 = [];
+        const boxes4 = [];
+        
+        class Box {
+            constructor(index, x, y) {
+                this.index = index; // box 고유번호 부여
+                this.x = x;
+                this.y = y;
+                this.draw();
+            }
+            draw() {
+                context.fillStyle = 'rgba(0,0,0,0.8)';
+                context.fillRect(this.x, this.y, 100, 20); // 넓이100, 두께20의 박스
+                context.fillStyle = '#fff';
+                context.fillText(this.index, this.x+45, this.y+13);
+            }
+        }
+
+        function render() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            let box;
+            for (let i=0; i<boxes1.length; i++) {
+                box = boxes1[i];
+                box.y += 3;
+                box.draw();
+            }
+            for (let i=0; i<boxes2.length; i++) {
+                box = boxes2[i];
+                box.y += 3;
+                box.draw();
+            }
+            for (let i=0; i<boxes3.length; i++) {
+                box = boxes3[i];
+                box.y += 3;
+                box.draw();
+            }
+            for (let i=0; i<boxes4.length; i++) {
+                box = boxes4[i];
+                box.y += 3;
+                box.draw();
+            }
+            requestAnimationFrame(render);
+        }
+        
+
+        let tempX1, tempY1, tempX2, tempY2, tempX3, tempY3, tempX4, tempY4, box;
+        
+        for (let i = 0; i < 3; i++) {
+            tempX1 = canvas.width * 0; // x축 랜덤 생성
+            tempY1 = Math.random() * canvas.height * -0.5; // y축 랜덤 생성
+            boxes1.push(new Box(i, tempX1, tempY1));
+        }
+        for (let i = 0; i < 3; i++) {
+            tempX2 = canvas.width * 0.25; // x축 랜덤 생성
+            tempY2 = Math.random() * canvas.height * -0.5; // y축 랜덤 생성
+            boxes2.push(new Box(i, tempX2, tempY2));
+        }        
+        for (let i = 0; i < 3; i++) {
+            tempX3 = canvas.width * 0.5; // x축 랜덤 생성
+            tempY3 = Math.random() * canvas.height * -0.5; // y축 랜덤 생성
+            boxes3.push(new Box(i, tempX3, tempY3));
+        }
+        for (let i = 0; i < 3; i++) {
+            tempX4 = canvas.width * 0.75; // x축 랜덤 생성
+            tempY4 = Math.random() * canvas.height * -0.5; // y축 랜덤 생성
+            boxes4.push(new Box(i, tempX4, tempY4));
+        }
+
+        document.addEventListener("keydown", e =>{
+            switch(e.keyCode){
+                case 68:
+                    boxes1.pop(tempX1, tempY1);
+                break;
+                case 70:
+                    boxes2.pop(tempX2, tempY2);
+                break;
+                case 74:
+                    boxes3.pop(tempX3, tempY3);
+                break;
+                case 75:
+                    boxes4.pop(tempX4, tempY4);
+                break;
+            }
+        });
+
+        render();
+    </script>
+</body>
+</html>
