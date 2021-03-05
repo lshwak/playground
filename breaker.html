@@ -6,14 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Breaker test</title>
     <style>
+        .row {
+            padding: 0 35%;
+        }
         canvas{
             background: #eee;
         }
     </style>
 </head>
 <body>
-    <canvas class="canvas" width="400" height="770"></canvas>
-    
+    <div class="row">
+        <canvas class="canvas" width="400" height="770"></canvas>
+    </div>
     <script>
         const canvas = document.querySelector('.canvas');
         const context = canvas.getContext('2d');
@@ -30,7 +34,6 @@
                 this.draw();
             }
             draw() {
-                context.fillStyle = 'rgba(0,0,0,0.8)';
                 context.fillRect(this.x, this.y, 100, 20); // 넓이100, 두께20의 박스
                 context.fillStyle = '#fff';
                 context.fillText(this.index, this.x+45, this.y+13);
@@ -41,21 +44,25 @@
             context.clearRect(0, 0, canvas.width, canvas.height);
             let box;
             for (let i=0; i<boxes1.length; i++) {
+                context.fillStyle = 'rgba(255,0,0,0.8)';
                 box = boxes1[i];
                 box.y += 7;
                 box.draw();
             }
             for (let i=0; i<boxes2.length; i++) {
+                context.fillStyle = 'rgba(0,255,0,0.8)';
                 box = boxes2[i];
                 box.y += 7;
                 box.draw();
             }
             for (let i=0; i<boxes3.length; i++) {
+                context.fillStyle = 'rgba(0,0,255,0.8)';
                 box = boxes3[i];
                 box.y += 7;
                 box.draw();
             }
             for (let i=0; i<boxes4.length; i++) {
+                context.fillStyle = 'rgba(0,0,0,0.8)';
                 box = boxes4[i];
                 box.y += 7;
                 box.draw();
