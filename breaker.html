@@ -18,6 +18,7 @@
     <div class="row">
         <canvas class="canvas" width="400" height="770"></canvas>
     </div>
+
     <script>
         const canvas = document.querySelector('.canvas');
         const context = canvas.getContext('2d');
@@ -25,6 +26,7 @@
         const boxes2 = [];
         const boxes3 = [];
         const boxes4 = [];
+        //let box;
         
         class Box {
             constructor(index, x, y) {
@@ -39,81 +41,94 @@
                 context.fillText(this.index, this.x+45, this.y+13);
             }
         }
-
+        
         function render() {
             context.clearRect(0, 0, canvas.width, canvas.height);
-            let box;
+            context.fillStyle = 'rgba(255,0,0,0.05)';
+            context.fillRect(0, 700, 400,10); // safeline
+            //let box;
             for (let i=0; i<boxes1.length; i++) {
                 context.fillStyle = 'rgba(255,0,0,0.8)';
                 box = boxes1[i];
                 box.y += 7;
+                if (box.y > canvas.height) {
+                    boxes1.shift(tempX1, tempY1);
+                }
                 box.draw();
             }
             for (let i=0; i<boxes2.length; i++) {
                 context.fillStyle = 'rgba(0,255,0,0.8)';
                 box = boxes2[i];
                 box.y += 7;
+                if (box.y > canvas.height) {
+                    boxes2.shift(tempX2, tempY2);
+                }
                 box.draw();
             }
             for (let i=0; i<boxes3.length; i++) {
                 context.fillStyle = 'rgba(0,0,255,0.8)';
                 box = boxes3[i];
                 box.y += 7;
+                if (box.y > canvas.height) {
+                    boxes3.shift(tempX3, tempY3);
+                }
                 box.draw();
             }
             for (let i=0; i<boxes4.length; i++) {
                 context.fillStyle = 'rgba(0,0,0,0.8)';
                 box = boxes4[i];
                 box.y += 7;
+                if (box.y > canvas.height) {
+                    boxes4.shift(tempX4, tempY4);
+                }
                 box.draw();
             }
-            requestAnimationFrame(render);
-        }
-        
-
+            requestAnimationFrame(render);   
+        }   
+    
         let tempX1, tempY1, tempX2, tempY2, tempX3, tempY3, tempX4, tempY4;
         function update() {
             
-        for (let i = 0; i < 1; i++) {
-            tempX1 = canvas.width * 0; // x축 랜덤 생성
-            tempY1 = Math.random() * canvas.height * -0.4; // y축 랜덤 생성
-            boxes1.push(new Box(i, tempX1, tempY1));
-        }
-        for (let i = 0; i < 1; i++) {
-            tempX2 = canvas.width * 0.25; // x축 랜덤 생성
-            tempY2 = Math.random() * canvas.height * -0.4; // y축 랜덤 생성
-            boxes2.push(new Box(i, tempX2, tempY2));
-        }        
-        for (let i = 0; i < 1; i++) {
-            tempX3 = canvas.width * 0.5; // x축 랜덤 생성
-            tempY3 = Math.random() * canvas.height * -0.4; // y축 랜덤 생성
-            boxes3.push(new Box(i, tempX3, tempY3));
-        }
-        for (let i = 0; i < 1; i++) {
-            tempX4 = canvas.width * 0.75; // x축 랜덤 생성
-            tempY4 = Math.random() * canvas.height * -0.4; // y축 랜덤 생성
-            boxes4.push(new Box(i, tempX4, tempY4));
-        }
-    }
-        
-
-        document.addEventListener("keydown", e =>{
-            switch(e.keyCode){
-                case 68: 
-                    boxes1.shift(tempX1, tempY1); // 배열 앞 순서부터 제거
-                break;
-                case 70:
-                    boxes2.shift(tempX2, tempY2);
-                break;
-                case 74:
-                    boxes3.shift(tempX3, tempY3);
-                break;
-                case 75:
-                    boxes4.shift(tempX4, tempY4);
-                break;
+            for (let i = 0; i < 1; i++) {
+                tempX1 = canvas.width * 0; // x축 랜덤 생성
+                tempY1 = Math.random() * canvas.height * -0.4; // y축 랜덤 생성
+                boxes1.push(new Box(i, tempX1, tempY1));
             }
-        });
+            for (let i = 0; i < 1; i++) {
+                tempX2 = canvas.width * 0.25; // x축 랜덤 생성
+                tempY2 = Math.random() * canvas.height * -0.4; // y축 랜덤 생성
+                boxes2.push(new Box(i, tempX2, tempY2));
+            }
+            for (let i = 0; i < 1; i++) {
+                tempX3 = canvas.width * 0.5; // x축 랜덤 생성
+                tempY3 = Math.random() * canvas.height * -0.4; // y축 랜덤 생성
+                boxes3.push(new Box(i, tempX3, tempY3));
+            }
+            for (let i = 0; i < 1; i++) {
+                tempX4 = canvas.width * 0.75; // x축 랜덤 생성
+                tempY4 = Math.random() * canvas.height * -0.4; // y축 랜덤 생성
+                boxes4.push(new Box(i, tempX4, tempY4));
+            }
+        }
 
+
+        function onButton(e) {
+            if (e.keyCode == 68) {
+                boxes1.shift(tempX1, tempY1);
+            }
+            if (e.keyCode == 70) {
+                boxes2.shift(tempX2, tempY2);
+            }
+            if (e.keyCode == 74) {
+                boxes3.shift(tempX3, tempY3);
+            }
+            if (e.keyCode == 75) {
+                boxes4.shift(tempX4, tempY4);
+            }
+        }
+        
+        
+        document.addEventListener("keydown", onButton);
         render();
         setInterval(update, 800)
     </script>
