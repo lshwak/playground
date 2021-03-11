@@ -26,11 +26,7 @@
         const boxes2 = [];
         const boxes3 = [];
         const boxes4 = [];
-        const real1 = []; // box.y가 해당 영역을 지나면 옮겨담을 변수
-        const real2 = [];
-        const real3 = [];
-        const real4 = [];
-    
+        
         
         class Box {
             constructor(index, x, y) {
@@ -41,8 +37,8 @@
             }
             draw() {
                 context.fillRect(this.x, this.y, 100, 20); // 넓이100, 두께20의 박스
-                context.fillStyle = '#fff';
-                context.fillText(this.index, this.x+45, this.y+13);
+                // context.fillStyle = '#fff';
+                // context.fillText(this.index, this.x+45, this.y+13);
             }
         }
         
@@ -114,18 +110,24 @@
                 boxes4.push(new Box(i, tempX4, tempY4));
             }
         }
+        
+        
 
 
         function onButton(e) {
+            // D
             if (e.keyCode == 68) {
                 boxes1.shift();
             }
+            // F
             if (e.keyCode == 70) {
                 boxes2.shift();
             }
+            // J
             if (e.keyCode == 74) {
                 boxes3.shift();
             }
+            // K
             if (e.keyCode == 75) {
                 boxes4.shift();
             }
@@ -153,11 +155,12 @@
         //         break;
         //     }
         // });
-        
-        
-        document.addEventListener("keydown", onButton);
-        render();
         setInterval(update, 800)
+        render();
+        document.addEventListener("keydown", onButton);
+        
+        
+
     </script>
 </body>
 </html>
