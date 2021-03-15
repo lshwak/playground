@@ -55,16 +55,26 @@
         function update() {    
             for (let i = 0; i < 1; i++) {
                 tempX = canvas.width * 0; // x축 랜덤 생성
-                tempY = Math.random() * canvas.height * -0.4; // y축 랜덤 생성
+                tempY = canvas.height * 0; // y축 랜덤 생성
                 boxes.push(new Box(tempX, tempY));
             }
         }
+        function init() {
+            var my = function() {
+                update();
+                var rand = Math.round(Math.random() * (3000-500)+500)
+                setTimeout(my, rand);  
+            }
+            my();
+        }
+        
         
         function onButton(e) {
             // 68 == "D"
+            console.log(box.y)
             if (e.keyCode == 68) {
                 boxes.shift();
-            }
+            } 
         }
         
         render();
