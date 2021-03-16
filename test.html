@@ -37,18 +37,22 @@
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.fillStyle = 'rgba(255,0,0,0.05)';
             context.fillRect(0, 500, 100,10); // safeline
-
+            
             for (let i=0; i<boxes.length; i++) {
                 context.fillStyle = 'rgba(255,0,0,0.8)';
                 box = boxes[i];
                 box.y += 7;
+                if (box.y > 500) {
+                    document.addEventListener("keydown", onButton);
+                }
                 if (box.y > canvas.height) {
                     boxes.shift();
                 }
                 box.draw();
             }
             requestAnimationFrame(render);
-        }   
+        }
+        
         
         let tempX, tempY;
 
@@ -71,16 +75,14 @@
         
         function onButton(e) {
             // 68 == "D"
-            console.log(box.y)
             if (e.keyCode == 68) {
                 boxes.shift();
             } 
         }
-        
         render();
-        document.addEventListener("keydown", onButton);
+        // document.addEventListener("keydown", onButton);
         setInterval(update, 800)
-
+        
     </script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
+var qs = require('querystring');
 // http, js, url 들은 모듈. node.js가 갖고있는 수 많은 기능들은 비슷한 것 끼리 그룹핑하는 것을 모듈이라고 한다.
 
 function templateHTML(title, list, body){
@@ -96,7 +97,7 @@ var app = http.createServer(function(request,response){
         var title = 'WEB - create';
         var list = templateList(filelist);
         var template = templateHTML(title, list, `
-        <form action="http://localhost:3000/process_create" method="post">
+        <form action="http://localhost:3000/create_process" method="post">
           <p><input type="text" name="title" placeholder="title"></p>
           <p>
               <textarea name="description" id="" cols="30" rows="10" placeholder="description"></textarea>
@@ -108,11 +109,24 @@ var app = http.createServer(function(request,response){
         `);
         response.writeHead(200);
         response.end(template);
-      })
+      });
+    } else if (pathname === '/create_process'){
+      var body = '';
+      request.on('data', function(data){
+        body = body + data;
+      });
+      request.on('end', function(){
+        var post = qs.parse(body);
+        var title = post.title;
+        var description = post.description;
+        console.log(post.title);
+      });
+      response.writeHead(200);
+      response.end('success');
     } else {
       response.writeHead(404);
       response.end('Not found');
-    }
+    } 
 
 });
 app.listen(3000);
