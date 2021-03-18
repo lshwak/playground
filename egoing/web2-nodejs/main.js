@@ -4,7 +4,7 @@ var url = require('url');
 var qs = require('querystring');
 // http, js, url 들은 모듈. node.js가 갖고있는 수 많은 기능들은 비슷한 것 끼리 그룹핑하는 것을 모듈이라고 한다.
 
-function templateHTML(title, list, body){
+function templateHTML(title, list, body, control){
   return `
   <!doctype html>
   <html>
@@ -15,7 +15,7 @@ function templateHTML(title, list, body){
   <body>
     <h1><a href="/">WEB</a></h1>
     ${list}
-    <a href="/create">create</a>
+    ${control}
     ${body}
   </body>
   </html>
@@ -71,7 +71,10 @@ var app = http.createServer(function(request,response){
           */
           
           var list = templateList(filelist);
-          var template = templateHTML(title, list, `<h2>${title}</h2>${description}`);
+          var template = templateHTML(title, list, 
+            `<h2>${title}</h2>${description}`,
+            `<a href="/create">create</a>`
+            );
         // 웹 애플리케이션에서 정보를 다이나믹하게 프로그래밍적으로 생성한다. 제목부분은 title인 동적으로 만들었다.
         response.writeHead(200);
         response.end(template);
@@ -85,7 +88,10 @@ var app = http.createServer(function(request,response){
           fs.readFile(`data/${queryData.id}`, 'utf8', function(err, description){
             var title = queryData.id;
             var list = templateList(filelist);
-            var template = templateHTML(title, list, `<h2>${title}</h2>${description}`);
+            var template = templateHTML(title, list, 
+              `<h2>${title}</h2>${description}`,
+              `<a href="/create">create</a> <a href="/update?id=${title}">update</a>`
+              );
           // 웹 애플리케이션에서 정보를 다이나믹하게 프로그래밍적으로 생성한다. 제목부분은 title인 동적으로 만들었다.
           response.writeHead(200);
           response.end(template);
@@ -106,7 +112,7 @@ var app = http.createServer(function(request,response){
               <input type="submit">
           </p>
         </form>
-        `);
+        `, '');
         response.writeHead(200);
         response.end(template);
       });
