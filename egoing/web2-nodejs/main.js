@@ -90,7 +90,14 @@ var app = http.createServer(function(request,response){
             var list = templateList(filelist);
             var template = templateHTML(title, list, 
               `<h2>${title}</h2>${description}`,
-              `<a href="/create">create</a> <a href="/update?id=${title}">update</a>`
+              `
+              <a href="/create">create</a> 
+              <a href="/update?id=${title}">update</a>
+              <form action="delete_process" method="post">
+              <input type="hidden" name="id" value="${title}">
+              <input type="submit" value="delete">
+              </form>
+              `
               );
           // 웹 애플리케이션에서 정보를 다이나믹하게 프로그래밍적으로 생성한다. 제목부분은 title인 동적으로 만들었다.
           response.writeHead(200);
