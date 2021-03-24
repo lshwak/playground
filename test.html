@@ -41,8 +41,8 @@
                 context.fillStyle = 'rgba(255,0,0,0.8)';
                 box = boxes[i];
                 box.y += 7;
-                if (box.y > 500) {
-                    document.addEventListener("keydown", onButton);    
+                if (box.y >= 500) {
+                    document.addEventListener("keydown", onButton);
                 }
                 if (box.y > canvas.height) {
                     boxes.shift();
@@ -72,12 +72,14 @@
         }
         
         
-        function onButton(e) {
-            // 68 == "D"
-            if (e.keyCode == 68) {
+        function onButton(e) { 
+            // 68 == "D" 32 == "space "
+            if (e.keyCode == 32) {
                 boxes.shift();
             } 
         }
+
+
         render();
         // document.addEventListener("keydown", onButton);
         setInterval(update, 800)
