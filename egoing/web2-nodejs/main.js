@@ -4,34 +4,36 @@ var url = require('url');
 var qs = require('querystring');
 // http, js, url 들은 모듈. node.js가 갖고있는 수 많은 기능들은 비슷한 것 끼리 그룹핑하는 것을 모듈이라고 한다.
 
-function templateHTML(title, list, body, control){
-  return `
-  <!doctype html>
-  <html>
-  <head>
-    <title>WEB1 - ${title}</title>
-    <meta charset="utf-8">
-  </head>
-  <body>
-    <h1><a href="/">WEB</a></h1>
-    ${list}
-    ${control}
-    ${body}
-  </body>
-  </html>
-  `;
+var template = {
+  HTML:function(title, list, body, control){
+    return `
+    <!doctype html>
+    <html>
+    <head>
+      <title>WEB1 - ${title}</title>
+      <meta charset="utf-8">
+    </head>
+    <body>
+      <h1><a href="/">WEB</a></h1>
+      ${list}
+      ${control}
+      ${body}
+    </body>
+    </html>
+    `;
+  }, list:function(filelist){
+    var list = '<ul>';
+    var i = 0;
+    while(i < filelist.length){
+      list = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
+      i = i + 1;
+    }
+    list = list + '</ul>';
+    return list;
+  }
 }
 
-function templateList(filelist){
-  var list = '<ul>';
-  var i = 0;
-  while(i < filelist.length){
-    list = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
-    i = i + 1;
-  }
-  list = list + '</ul>';
-  return list;
-}
+
 
 
 var app = http.createServer(function(request,response){
@@ -70,6 +72,7 @@ var app = http.createServer(function(request,response){
         </ul>`
           */
           
+          /*
           var list = templateList(filelist);
           var template = templateHTML(title, list, 
             `<h2>${title}</h2>${description}`,
@@ -78,6 +81,16 @@ var app = http.createServer(function(request,response){
         // 웹 애플리케이션에서 정보를 다이나믹하게 프로그래밍적으로 생성한다. 제목부분은 title인 동적으로 만들었다.
         response.writeHead(200);
         response.end(template);
+        */
+
+        var list = template.list(filelist);
+          var html = template.HTML(title, list, 
+            `<h2>${title}</h2>${description}`,
+            `<a href="/create">create</a>`
+            );
+        // 웹 애플리케이션에서 정보를 다이나믹하게 프로그래밍적으로 생성한다. 제목부분은 title인 동적으로 만들었다.
+        response.writeHead(200);
+        response.end(html);
 
         })
 
@@ -87,8 +100,8 @@ var app = http.createServer(function(request,response){
         fs.readdir('./data', function(error, filelist){
           fs.readFile(`data/${queryData.id}`, 'utf8', function(err, description){
             var title = queryData.id;
-            var list = templateList(filelist);
-            var template = templateHTML(title, list, 
+            var list = template.list(filelist);
+            var html = template.HTML(title, list, 
               `<h2>${title}</h2>${description}`,
               `
               <a href="/create">create</a> 
@@ -101,15 +114,15 @@ var app = http.createServer(function(request,response){
               );
           // 웹 애플리케이션에서 정보를 다이나믹하게 프로그래밍적으로 생성한다. 제목부분은 title인 동적으로 만들었다.
           response.writeHead(200);
-          response.end(template);
+          response.end(html);
           });
         });
       }
     } else if (pathname === '/create') {
       fs.readdir('./data', function(error, filelist){
         var title = 'WEB - create';
-        var list = templateList(filelist);
-        var template = templateHTML(title, list, `
+        var list = template.list(filelist);
+        var html = template.HTML(title, list, `
         <form action="http:/create_process" method="post">
           <p><input type="text" name="title" placeholder="title"></p>
           <p>
@@ -121,7 +134,7 @@ var app = http.createServer(function(request,response){
         </form>
         `, '');
         response.writeHead(200);
-        response.end(template);
+        response.end(html);
       });
     } else if (pathname === '/create_process'){
       var body = '';
@@ -141,8 +154,8 @@ var app = http.createServer(function(request,response){
       fs.readdir('./data', function(error, filelist){
         fs.readFile(`data/${queryData.id}`, 'utf8', function(err, description){
           var title = queryData.id;
-          var list = templateList(filelist);
-          var template = templateHTML(title, list, 
+          var list = template.list(filelist);
+          var html = template.HTML(title, list, 
             `
             <form action="http:/update_process" method="post">
               <input type="hidden" name="id" value="${title}">
@@ -158,7 +171,7 @@ var app = http.createServer(function(request,response){
             `<a href="/create">create</a> <a href="/update?id=${title}">update</a>`
             );
         response.writeHead(200);
-        response.end(template);
+        response.end(html);
         });
       });
     } else if (pathname === '/update_process'){
