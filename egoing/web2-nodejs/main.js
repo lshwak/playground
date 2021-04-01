@@ -4,34 +4,36 @@ var url = require('url');
 var qs = require('querystring');
 // http, js, url 들은 모듈. node.js가 갖고있는 수 많은 기능들은 비슷한 것 끼리 그룹핑하는 것을 모듈이라고 한다.
 
-var template = {
-  HTML:function(title, list, body, control){
-    return `
-    <!doctype html>
-    <html>
-    <head>
-      <title>WEB1 - ${title}</title>
-      <meta charset="utf-8">
-    </head>
-    <body>
-      <h1><a href="/">WEB</a></h1>
-      ${list}
-      ${control}
-      ${body}
-    </body>
-    </html>
-    `;
-  }, list:function(filelist){
-    var list = '<ul>';
-    var i = 0;
-    while(i < filelist.length){
-      list = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
-      i = i + 1;
-    }
-    list = list + '</ul>';
-    return list;
-  }
-}
+var template = require('./lib/template.js');
+// lib/template.js로 이동한 code
+// {
+//   HTML:function(title, list, body, control){
+//     return `
+//     <!doctype html>
+//     <html>
+//     <head>
+//       <title>WEB1 - ${title}</title>
+//       <meta charset="utf-8">
+//     </head>
+//     <body>
+//       <h1><a href="/">WEB</a></h1>
+//       ${list}
+//       ${control}
+//       ${body}
+//     </body>
+//     </html>
+//     `;
+//   }, list:function(filelist){
+//     var list = '<ul>';
+//     var i = 0;
+//     while(i < filelist.length){
+//       list = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
+//       i = i + 1;
+//     }
+//     list = list + '</ul>';
+//     return list;
+//   }
+// }
 
 
 
