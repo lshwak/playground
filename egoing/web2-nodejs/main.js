@@ -3,7 +3,7 @@ var fs = require('fs');
 var url = require('url');
 var qs = require('querystring');
 // http, js, url 들은 모듈. node.js가 갖고있는 수 많은 기능들은 비슷한 것 끼리 그룹핑하는 것을 모듈이라고 한다.
-
+var path = require('path');
 var template = require('./lib/template.js');
 // lib/template.js로 이동한 code
 // {
@@ -100,7 +100,8 @@ var app = http.createServer(function(request,response){
         // });
       } else {
         fs.readdir('./data', function(error, filelist){
-          fs.readFile(`data/${queryData.id}`, 'utf8', function(err, description){
+          var filterdId = path.parse(queryData.id).base;
+          fs.readFile(`data/${filterdId}`, 'utf8', function(err, description){
             var title = queryData.id;
             var list = template.list(filelist);
             var html = template.HTML(title, list, 
@@ -154,7 +155,8 @@ var app = http.createServer(function(request,response){
       });
     } else if (pathname === '/update') {
       fs.readdir('./data', function(error, filelist){
-        fs.readFile(`data/${queryData.id}`, 'utf8', function(err, description){
+        var filterdId = path.parse(queryData.id).base;
+        fs.readFile(`data/${filterdId}`, 'utf8', function(err, description){
           var title = queryData.id;
           var list = template.list(filelist);
           var html = template.HTML(title, list, 
@@ -201,7 +203,8 @@ var app = http.createServer(function(request,response){
       request.on('end', function(){
         var post = qs.parse(body);
         var id = post.id;
-        fs.unlink(`data/${id}`, function(error){
+        var filterdId = path.parse(id).base;
+        fs.unlink(`data/${filterdId}`, function(error){
           response.writeHead(302, {Location: `/`});
           response.end('success');
         });
