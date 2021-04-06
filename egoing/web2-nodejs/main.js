@@ -39,7 +39,7 @@ var sanitizeHtml = require('sanitize-html');
 
 
 
-var app = http.createServer(function(request,response){
+var app = http.createServer(function(request,response){ // http를 통한 createSever메소드의 request, response 인자들..
     var _url = request.url;
     var queryData = url.parse(_url, true).query;
     var pathname = url.parse(_url, true).pathname;
