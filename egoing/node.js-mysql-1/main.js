@@ -112,7 +112,7 @@ var app = http.createServer(function(request,response){
         });
       });
         
-
+      // 글 생성
     } else if(pathname === '/create_process'){
       var body = '';
       request.on('data', function(data){
