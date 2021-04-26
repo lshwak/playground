@@ -1,11 +1,11 @@
 var http = require('http');
 var url = require('url');
-var qs = require('querystring');
-var template = require('./lib/template.js');
-var db = require('./lib/db');
 var topic = require('./lib/topic');
 var author = require('./lib/author');
-const { authorSelect } = require('./lib/template.js');
+//var qs = require('querystring');
+//var template = require('./lib/template.js');
+//var db = require('./lib/db');
+//const { authorSelect } = require('./lib/template.js');
 
 
 var app = http.createServer(function(request,response){
@@ -16,35 +16,10 @@ var app = http.createServer(function(request,response){
       if(queryData.id === undefined){
         topic.home(request, response);
       } else {
-        /*
-        fs.readdir('./data', function(error, filelist){
-          var filteredId = path.parse(queryData.id).base;
-          fs.readFile(`data/${filteredId}`, 'utf8', function(err, description){
-            var title = queryData.id;
-            var sanitizedTitle = sanitizeHtml(title);
-            var sanitizedDescription = sanitizeHtml(description, {
-              allowedTags:['h1']
-            });
-            var list = template.list(filelist);
-            var html = template.HTML(sanitizedTitle, list,
-              `<h2>${sanitizedTitle}</h2>${sanitizedDescription}`,
-              ` <a href="/create">create</a>
-                <a href="/update?id=${sanitizedTitle}">update</a>
-                <form action="delete_process" method="post">
-                  <input type="hidden" name="id" value="${sanitizedTitle}">
-                  <input type="submit" value="delete">
-                </form>`
-            );
-            response.writeHead(200);
-            response.end(html);
-          });
-        });
-        */
         topic.page(request, response);
       }
     } else if(pathname === '/create'){
       topic.create(request, response);
-        
       // 글 생성
     } else if(pathname === '/create_process'){
       topic.create_process(request, response);
@@ -60,6 +35,8 @@ var app = http.createServer(function(request,response){
       author.create_process(request, response);
     } else if(pathname === '/author/update'){ 
       author.update(request, response);
+    } else if(pathname === '/author/update_process'){ 
+      author.update_process(request, response);
     } else {
       response.writeHead(404);
       response.end('Not found');
