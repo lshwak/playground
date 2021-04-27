@@ -20,7 +20,6 @@ var app = http.createServer(function(request,response){
       }
     } else if(pathname === '/create'){
       topic.create(request, response);
-      // 글 생성
     } else if(pathname === '/create_process'){
       topic.create_process(request, response);
     } else if(pathname === '/update'){
@@ -37,6 +36,8 @@ var app = http.createServer(function(request,response){
       author.update(request, response);
     } else if(pathname === '/author/update_process'){ 
       author.update_process(request, response);
+    } else if(pathname === '/author/delete_process'){ 
+      author.delete_process(request, response);
     } else {
       response.writeHead(404);
       response.end('Not found');
