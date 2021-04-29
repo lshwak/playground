@@ -24,6 +24,9 @@ exports.page = function(request, response){
     if(error) {
       throw error;
     }
+    // var sql = `SELECT * FROM topic LEFT JOIN author ON topic.author_id=author.id WHERE topic.id=${db.escape(queryData.id)}`;
+    // console.log(sql);
+    // var query = db.query(sql, function(error2, topic){
     var query = db.query(`SELECT * FROM topic LEFT JOIN author ON topic.author_id=author.id WHERE topic.id=?`,[queryData.id] , function(error2, topic){
       if(error2) {
         throw error2;
