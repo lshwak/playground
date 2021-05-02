@@ -68,10 +68,9 @@
                 var rand = Math.round(Math.random() * (3000-500)+500)
                 setTimeout(my, rand);  
             }
-            my();
         }
         
-        
+        // box.y 값을 가져와 키값이 입력될 때 마다 좌표 알아내기.
         function onButton(e) { 
             // 68 == "D" 32 == "space "
             if (e.keyCode == 32) {
