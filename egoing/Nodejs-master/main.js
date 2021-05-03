@@ -1,18 +1,24 @@
-const express = require('express')
-const app = express()
-const port = 3000
+var express = require('express')
+var app = express()
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+// get메소드는 route, routing 이라고 함.
+// app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/', function(req, res) {
+  return res.send('/');
+});
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+app.get('/page', function(req, res) {
+  return res.send('/page');
+});
+
+app.listen(3000, function() {
+  console.log('Example app listening on port 3000!')
+});
 
 
 /* 
 // 아래 코드를 기반으로 재구성 할 예정
+
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
