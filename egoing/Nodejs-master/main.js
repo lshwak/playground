@@ -1,8 +1,8 @@
-var express = require('express')
-var app = express()
+var express = require('express') // express도 결국 모듈.
+var app = express() // express를 함수처럼 호출하고있다. express는 함수라는 뜻.
 
 // get메소드는 route, routing 이라고 함.
-// app.get('/', (req, res) => res.send('Hello World!'))
+// app.get('/', (req, res) => res.send('Hello World!')) // 최신코드지만 아래코드와 완벽히 같다. 
 app.get('/', function(req, res) {
   return res.send('/');
 });
