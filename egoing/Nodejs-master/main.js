@@ -1,10 +1,21 @@
 var express = require('express') // express도 결국 모듈.
 var app = express() // express를 함수처럼 호출하고있다. express는 함수라는 뜻.
+var fs = require('fs');
+var template = require('./lib/template.js');
 
 // get메소드는 route, routing 이라고 함.
 // app.get('/', (req, res) => res.send('Hello World!')) // 최신코드지만 아래코드와 완벽히 같다. 
-app.get('/', function(req, res) {
-  return res.send('/');
+app.get('/', function(request, response) {
+  fs.readdir('./data', function(error, filelist){
+    var title = 'Welcome';
+    var description = 'Hello, Node.js';
+    var list = template.list(filelist);
+    var html = template.HTML(title, list,
+      `<h2>${title}</h2>${description}`,
+      `<a href="/create">create</a>`
+    );
+    response.send(html);
+  });
 });
 
 app.get('/page', function(req, res) {
