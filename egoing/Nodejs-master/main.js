@@ -5,9 +5,11 @@ var path = require('path');
 var qs = require('querystring');
 var bodyParser = require('body-parser')
 var sanitizeHtml = require('sanitize-html');
+var compression = require('compression');
 var template = require('./lib/template.js');
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(compression());
 
 // get메소드는 route, routing 이라고 함.
 // app.get('/', (req, res) => res.send('Hello World!')) // 최신코드지만 아래코드와 완벽히 같다. 
