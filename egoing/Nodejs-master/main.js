@@ -1,10 +1,9 @@
 var express = require('express') // express도 결국 모듈.
 var app = express() // express를 함수처럼 호출하고있다. express는 함수라는 뜻.
 var fs = require('fs');
-var qs = require('querystring');
 var bodyParser = require('body-parser')
 var compression = require('compression');
-var template = require('./lib/template.js');
+var indexRouter = require('./routes/index');
 var topicRouter = require('./routes/topic');
 
 app.use(express.static('public'));
@@ -17,23 +16,8 @@ app.get('*', function(request, response, next){
   });
 });
 
+app.use('/', indexRouter);
 app.use('/topic', topicRouter);
-
-// get메소드는 route, routing 이라고 함.
-// app.get('/', (req, res) => res.send('Hello World!')) // 최신코드지만 아래코드와 완벽히 같다. 
-app.get('/', function(request, response) {
-  var title = 'Welcome';
-  var description = 'Hello, Node.js';
-  var list = template.list(request.list);
-  var html = template.HTML(title, list,
-    `
-    <h2>${title}</h2>${description}
-    <img src="/images/hello.jpg" style="width:300px; display:block; margin-top:10px">
-    `,
-    `<a href="/topic/create">create</a>`
-  );
-  response.send(html);
-});
 
 
 
