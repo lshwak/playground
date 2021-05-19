@@ -3,6 +3,8 @@ var app = express() // express를 함수처럼 호출하고있다. express는 �
 var fs = require('fs');
 var bodyParser = require('body-parser')
 var compression = require('compression');
+var helmet = require('helmet')
+app.use(helmet());
 var indexRouter = require('./routes/index');
 var topicRouter = require('./routes/topic');
 
