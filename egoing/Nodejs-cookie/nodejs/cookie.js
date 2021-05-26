@@ -13,7 +13,8 @@ http.createServer(function(request, response){
             'tasty_cookie=strawberry', 
             `Permanent=cookies; Max-Age=${60*60*24*30}`,
             'Secure=Secure; Secure',
-            'HttpOnly=HttpOnly; HttpOnly'
+            'HttpOnly=HttpOnly; HttpOnly',
+            'Path=Path; Path=/cookie'
         ]
     });
     response.end('Cookie!');
