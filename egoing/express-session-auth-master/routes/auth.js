@@ -24,7 +24,7 @@ router.get('/login', function (request, response) {
     </form>
   `, '');
   response.send(html);
-});
+}); // login을 눌렀을 때 login_process로 이동하는것을 확인.
 
 router.post('/login_process', function (request, response) {
   var post = request.body;
