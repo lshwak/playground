@@ -6,10 +6,10 @@ var sanitizeHtml = require('sanitize-html');
 var template = require('../lib/template.js');
 
 var authData = {
-  email: 'egoing777@gmail.com',
-  password: '111111',
+  email: 'abc@naver.com',
+  password: '1234',
   nickname: 'egoing'
-}
+} // 비밀번호가 소스코드에 있으면 이 소스코드를 공개했을 때 비밀번호가 딸려갈 수 있기때문에 비밀번호를 소스코드 바깥으로 뺄 수 있는 방안을 모색해야한다. 
 
 router.get('/login', function (request, response) {
   var title = 'WEB - login';
