@@ -5,8 +5,8 @@ var bodyParser = require('body-parser');
 var compression = require('compression');
 var helmet = require('helmet')
 app.use(helmet());
-var session = require('express-session')
-var FileStore = require('session-file-store')(session)
+var session = require('express-session') // session 미들웨어
+var FileStore = require('session-file-store')(session) // session을 파일에 저장하는것 보다 database에 저장하는 것이 더 바람직하다.
 
 
 app.use(express.static('public'));
