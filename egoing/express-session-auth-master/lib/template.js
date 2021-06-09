@@ -1,5 +1,5 @@
 module.exports = {
-  HTML:function(title, list, body, control, authStatusUI='<a href="/auth/login">login</a>'){
+  HTML:function(title, list, body, control, authStatusUI='<a href="/auth/login">login</a>'){ //authStatusUI 값이 없으며 기본값 a태그
     return `
     <!doctype html>
     <html>

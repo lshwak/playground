@@ -3,7 +3,25 @@ var router = express.Router();
 var template = require('../lib/template.js');
 var auth = require('../lib/auth');
 
+function authIsOwner(request, response){
+  if(request.session.is_logined){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function authStatusUI(request, response){
+  var authStatusUI = '<a href="/auth/login">login</a>'
+  if(authIsOwner(request, response)){
+    authStatusUI = `${request.session.nickname} | <a href="/auth/logout">logout</a>`;
+  }
+  return authStatusUI;
+}
+
 router.get('/', function (request, response) {
+  // console.log(request.session);
+  
   var title = 'Welcome';
   var description = 'Hello, Node.js';
   var list = template.list(request.list);
