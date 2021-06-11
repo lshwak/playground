@@ -42,7 +42,7 @@ router.post('/login_process', function (request, response) {
 });
 
 router.get('/logout', function (request, response) {
-  request.session.destroy(function(err){
+  request.session.destroy(function(err){ // destroy메소드를 호출하면 session이 삭제. 콜백 error를 인자로 받는다. 
     response.redirect('/');
   });
 });
