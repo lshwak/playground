@@ -41,9 +41,9 @@ router.post('/create_process', function (request, response) {
 });
 
 router.get('/update/:pageId', function (request, response) {
-  if (!auth.isOwner(request, response)) {
+  if (!auth.isOwner(request, response)) { // 소유자가 아니라면
     response.redirect('/');
-    return false;
+    return false; // 끊어야 다음 코드들이 실행되지 않을 것.
   }
   var filteredId = path.parse(request.params.pageId).base;
   fs.readFile(`data/${filteredId}`, 'utf8', function (err, description) {
