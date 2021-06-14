@@ -35,11 +35,12 @@ router.post('/login_process', function (request, response) {
     request.session.nickname = authData.nickname;
     request.session.save(function(){
       response.redirect(`/`);
-    });
+    }); // session store에 반영하는 작업을 바로 시작, 작업이 모두 끝나면 인자로 전달된 콜백함수를 전달하도록 약속되어있다.
   } else {
     response.send('Who?');
   }
 });
+// session middleware는 기록한 데이터를 session store에 기록하는 작업을 한다. = 메모리에 저장된 session data를 저장소에 반영하는 작업.
 
 router.get('/logout', function (request, response) {
   request.session.destroy(function(err){ // destroy메소드를 호출하면 session이 삭제. 콜백 error를 인자로 받는다. 
