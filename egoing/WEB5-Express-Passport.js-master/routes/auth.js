@@ -30,6 +30,7 @@ module.exports = function (passport) {
     response.send(html);
   });
 
+  // passport version
   router.post('/login_process',
     passport.authenticate('local', {
       successRedirect: '/',

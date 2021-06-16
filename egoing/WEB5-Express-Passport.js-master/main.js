@@ -24,9 +24,16 @@ app.use(flash());
 
 // var passport = require('./lib/passport')(app);
 
-var passport = require('passport')
-  , LocalStrategy = require('passport-local')
-  .Strategy;
+var passport = require('passport'),
+  LocalStrategy = require('passport-local').Strategy;
+  app.post('/auth/login_process',
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/auth/login'
+  }));
+/* passport에 여러 전략 중 local은 username, password를 이용해서 login.
+  local이 아닌 것은 페이스북이나 구글을 통해 로그인.
+ */
 
 app.get('*', function (request, response, next) {
   fs.readdir('./data', function (error, filelist) {
