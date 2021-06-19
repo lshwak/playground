@@ -33,6 +33,19 @@ var authData = {
 var passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy;
 
+app.use(passport.initialize()); // passport를 설치한거고 express가 호출될때마다 passport가 express에 개입된다.
+app.use(passport.session());
+
+passport.serializeUser(function(user, done){
+  // done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done){
+  // User.findById(id, function(err, user) {
+  //   done(err, user);
+  // });
+});
+
   passport.use(new LocalStrategy(
     {
       usernameField: 'email',
