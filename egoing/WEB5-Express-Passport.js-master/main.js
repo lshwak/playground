@@ -36,11 +36,16 @@ var passport = require('passport'),
 app.use(passport.initialize()); // passport를 설치한거고 express가 호출될때마다 passport가 express에 개입된다.
 app.use(passport.session());
 
+// login에 성공했을 때 serialazUser메소드의 인자로 전달된 콜백함수가 호출 되도록 약속되어있다.
 passport.serializeUser(function(user, done){
-  // done(null, user.id);
+  console.log('serializeUser', user);
+  done(null, user.email);
+  // done(null, user.id); // 두번째 인자는 각각의 인자의 식별자.
 });
 
 passport.deserializeUser(function(id, done){
+  console.log('deserializeUser', id);
+  done(null, authData);
   // User.findById(id, function(err, user) {
   //   done(err, user);
   // });
