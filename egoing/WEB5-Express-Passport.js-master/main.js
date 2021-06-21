@@ -37,18 +37,16 @@ app.use(passport.initialize()); // passport를 설치한거고 express가 호출
 app.use(passport.session());
 
 // login에 성공했을 때 serialazUser메소드의 인자로 전달된 콜백함수가 호출 되도록 약속되어있다.
+// serializeUser는 로그인에 성공한 사실을 딱 한번 호출하면서 session store에 저장하는 기능.
 passport.serializeUser(function(user, done){
   console.log('serializeUser', user);
   done(null, user.email);
-  // done(null, user.id); // 두번째 인자는 각각의 인자의 식별자.
 });
+// 두번째 인자는 각각의 인자의 식별자.
 
 passport.deserializeUser(function(id, done){
   console.log('deserializeUser', id);
   done(null, authData);
-  // User.findById(id, function(err, user) {
-  //   done(err, user);
-  // });
 });
 
   passport.use(new LocalStrategy(
