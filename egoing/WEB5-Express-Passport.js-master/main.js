@@ -30,9 +30,11 @@ var authData = {
   nickname: 'egoing'
 };
 
+// passport 설치
 var passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy;
 
+  //express에 설치, session에 사용정의
 app.use(passport.initialize()); // passport를 설치한거고 express가 호출될때마다 passport가 express에 개입된다.
 app.use(passport.session());
 
@@ -44,11 +46,13 @@ passport.serializeUser(function(user, done){
 });
 // 두번째 인자는 각각의 인자의 식별자.
 
+// page를 방문할 때 마다 session store의 식별자를 가져와서 식별자를 기준으로 사용자의 실제 사용할 데이터를 가져오는 방법 정의
 passport.deserializeUser(function(id, done){
   console.log('deserializeUser', id);
   done(null, authData);
 });
 
+// login 성공 or 실패 유무 판별
   passport.use(new LocalStrategy(
     {
       usernameField: 'email',
@@ -77,6 +81,7 @@ passport.deserializeUser(function(id, done){
   ));
   // false가 아닌 값은 javascript에선 true로 친다. 성공한 사용자의 정보는 무엇인지 passport에 알려주는것.
 
+  // 사용자가 전송한 data를 받았을 때 어떻게 처리할 것인가.
 app.post('/auth/login_process',
   passport.authenticate('local', {
     successRedirect: '/',
