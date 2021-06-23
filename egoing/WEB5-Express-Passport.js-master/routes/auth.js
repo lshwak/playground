@@ -45,6 +45,12 @@ module.exports = function (passport) {
       response.redirect('/');
     });
   });
+  /*
+  logout했는데 logout이 안됬다고 뜨고 한참 있다가 reload하면 그제서야 logout이 될때가 있다.
+  아마도 session에서도 destroy를 하고서 콜백함수를 통해서 실제로 session store에 대한 작업이 끝난 다음에 response.redirect를 호출하게 했던것과 비슷한 문제일듯.
+  즉 passport에 logout하고 session을 지우는것까지 한 다음에 redirect한다.
+  save는 현재 session의 상태를 session store에 저장하고 저장작업이 끝나면 redirect를 시키는 코드. destroy는 session을 지우는 것.
+  */
 
   return router;
 }
