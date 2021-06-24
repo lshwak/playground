@@ -21,6 +21,16 @@ app.use(session({
   store: new FileStore()
 }))
 app.use(flash());
+// session을 내부적으로 쓰고있기 때문에 session다음에 middleware를 설치할것. 미들웨어는 실행 순서가 중요.
+
+app.get('/flash', function(req, res){
+  req.flash('info', 'Flash is back!')
+  res.send('flash');
+});
+
+app.get('/flach-display', function(req, res){
+  res.render('index', { messages: req.flash('info') });
+});
 
 // var passport = require('./lib/passport')(app);
 
