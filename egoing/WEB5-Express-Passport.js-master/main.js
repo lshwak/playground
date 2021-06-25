@@ -23,18 +23,6 @@ app.use(session({
 app.use(flash());
 // session을 내부적으로 쓰고있기 때문에 session다음에 middleware를 설치할것. 미들웨어는 실행 순서가 중요.
 
-app.get('/flash', function(req, res){
-  req.flash('msg', 'Flash is back!!')
-  res.send('flash');
-});
-// flash method를 호출하면 sessionstore에 입력한 데이터를 추가하도록 되어있다.
-
-app.get('/flash-display', function(req, res){
-  var fmsg = req.flash();
-  console.log(fmsg);
-  res.send(fmsg);
-});
-
 // var passport = require('./lib/passport')(app);
 
 var authData = {
@@ -98,7 +86,9 @@ passport.deserializeUser(function(id, done){
 app.post('/auth/login_process',
   passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/auth/login'
+    failureRedirect: '/auth/login',
+    failureFlash: true,
+    successFlash: true
   }));
 /* passport에 여러 전략 중 local은 username, password를 이용해서 login.
   local이 아닌 것은 페이스북이나 구글을 통해 로그인.
