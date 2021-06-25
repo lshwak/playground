@@ -24,12 +24,15 @@ app.use(flash());
 // session을 내부적으로 쓰고있기 때문에 session다음에 middleware를 설치할것. 미들웨어는 실행 순서가 중요.
 
 app.get('/flash', function(req, res){
-  req.flash('info', 'Flash is back!')
+  req.flash('msg', 'Flash is back!!')
   res.send('flash');
 });
+// flash method를 호출하면 sessionstore에 입력한 데이터를 추가하도록 되어있다.
 
-app.get('/flach-display', function(req, res){
-  res.render('index', { messages: req.flash('info') });
+app.get('/flash-display', function(req, res){
+  var fmsg = req.flash();
+  console.log(fmsg);
+  res.send(fmsg);
 });
 
 // var passport = require('./lib/passport')(app);
