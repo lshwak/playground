@@ -4,7 +4,6 @@ var template = require('../lib/template.js');
 var auth = require('../lib/auth');
 
 router.get('/', function (request, response) {
-  console.log('/', request.user); // request객체에 user객체가 들어가 있는지를 확인.
   var fmsg = request.flash();
   var feedback = '';
   if(fmsg.success){

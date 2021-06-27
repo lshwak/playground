@@ -1,5 +1,6 @@
+// main.js의 app은 외부에 의존하고있다. passport.js 안으로 주입.
+// 함수를 외부로 export. passport.js는 함수 자체
 module.exports = function (app) {
-
     var authData = {
         email: 'egoing777@gmail.com',
         password: '111111',

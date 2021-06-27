@@ -25,12 +25,15 @@ app.use(flash());
 
 // var passport = require('./lib/passport')(app);
 
-var authData = {
-  email: 'egoing777@gmail.com',
-  password: '111111',
-  nickname: 'egoing'
-};
+// var authData = {
+//   email: 'egoing777@gmail.com',
+//   password: '111111',
+//   nickname: 'egoing'
+// };
 
+var passport = require('./lib/passport')(app);
+
+/*
 // passport 설치
 var passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy;
@@ -81,15 +84,17 @@ passport.deserializeUser(function(id, done){
     }
   ));
   // false가 아닌 값은 javascript에선 true로 친다. 성공한 사용자의 정보는 무엇인지 passport에 알려주는것.
+*/
+
 
   // 사용자가 전송한 data를 받았을 때 어떻게 처리할 것인가.
-app.post('/auth/login_process',
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/auth/login',
-    failureFlash: true,
-    successFlash: true
-  }));
+// app.post('/auth/login_process',
+//   passport.authenticate('local', {
+//     successRedirect: '/',
+//     failureRedirect: '/auth/login',
+//     failureFlash: true,
+//     successFlash: true
+//   }));
 /* passport에 여러 전략 중 local은 username, password를 이용해서 login.
   local이 아닌 것은 페이스북이나 구글을 통해 로그인.
  */
