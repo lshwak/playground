@@ -8,9 +8,8 @@ var template = require('../lib/template.js');
 var low = require('lowdb');
 var FileSync = require('lowdb/adapters/FileSync');
 var adapter = new FileSync('db.json');
-var db = low(adapter); 
+var db = low(adapter);
 db.defaults({users:[]}).write();
-
 
 
 module.exports = function (passport) {
@@ -73,12 +72,17 @@ module.exports = function (passport) {
       var pwd = post.pwd;
       var pwd2 = post.pwd2;
       var displayName = post.displayName;
-      db.get('users').push({
-        email:email,
-        password:pwd,
-        displayName:displayName
-      }).write();
-      response.redirect('/');
+      if(pwd != pwd2){
+        request.flash('error', 'Password must same!');
+        response.redirect('/auth/register');
+      } else {
+        db.get('users').push({
+          email:email,
+          password:pwd,
+          displayName:displayName
+        }).write();
+        response.redirect('/');
+      }
     });
 
   router.get('/logout', function (request, response) {
