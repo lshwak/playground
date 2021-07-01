@@ -9,7 +9,7 @@ module.exports = {
     statusUI:function(request, response) {
         var authStatusUI = '<a href="/auth/login">login</a> | <a href="/auth/register">Register</a>'
         if (this.isOwner(request, response)) {
-            authStatusUI = `${request.user.nickname} | <a href="/auth/logout">logout</a>`; // request.session.nickname -> request.user.nickname.
+            authStatusUI = `${request.user.displayName} | <a href="/auth/logout">logout</a>`; // request.session.nickname -> request.user.nickname.
         }
         return authStatusUI;
     }

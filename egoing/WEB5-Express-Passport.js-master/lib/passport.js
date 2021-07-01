@@ -1,5 +1,8 @@
 // main.js의 app은 외부에 의존하고있다. passport.js 안으로 주입.
 // 함수를 외부로 export. passport.js는 함수 자체
+
+var db = require('../lib/db');
+
 module.exports = function (app) {
     var authData = {
         email: 'egoing777@gmail.com',
@@ -14,11 +17,14 @@ module.exports = function (app) {
     app.use(passport.session());
 
     passport.serializeUser(function (user, done) {
-        done(null, user.email);
+        console.log('serializeUser', user);
+        done(null, user.id);
     });
 
     passport.deserializeUser(function (id, done) {
-        done(null, authData);
+        var user = db.get('users').find({id:id}).value();
+        console.log('deserializeUser', id, user);
+        done(null, user);
     });
 
     passport.use(new LocalStrategy({
@@ -26,6 +32,7 @@ module.exports = function (app) {
             passwordField: 'pwd'
         },
         function (username, password, done) {
+            console.log('LocalStrategy', username, password);
             if (username === authData.email) {
                 if (password === authData.password) {
                     return done(null, authData, {
