@@ -4,11 +4,11 @@
 var db = require('../lib/db');
 
 module.exports = function (app) {
-    var authData = {
-        email: 'egoing777@gmail.com',
-        password: '111111',
-        nickname: 'egoing'
-      };
+    // var authData = {
+    //     email: 'egoing777@gmail.com',
+    //     password: '111111',
+    //     nickname: 'egoing'
+    //   };
 
     var passport = require('passport'),
         LocalStrategy = require('passport-local').Strategy;
@@ -31,23 +31,33 @@ module.exports = function (app) {
             usernameField: 'email',
             passwordField: 'pwd'
         },
-        function (username, password, done) {
-            console.log('LocalStrategy', username, password);
-            if (username === authData.email) {
-                if (password === authData.password) {
-                    return done(null, authData, {
-                        message: 'Welcome.'
-                    });
-                } else {
-                    return done(null, false, {
-                        message: 'Incorrect password.'
-                    });
-                }
+        function (email, password, done) {
+            console.log('LocalStrategy', email, password);
+            var user = db.get('users').find({email:email, password:password}).value();
+            if(user){
+                return done(null, user, {
+                    message: 'Welcome.'
+                });
             } else {
                 return done(null, false, {
-                    message: 'Incorrect username.'
+                    message: 'Incorrect user information.'
                 });
             }
+            // if (email === authData.email) {
+            //     if (password === authData.password) {
+            //         return done(null, authData, {
+            //             message: 'Welcome.'
+            //         });
+            //     } else {
+            //         return done(null, false, {
+            //             message: 'Incorrect password.'
+            //         });
+            //     }
+            // } else {
+            //     return done(null, false, {
+            //         message: 'Incorrect username.'
+            //     });
+            // }
         }
     ));
     return passport;
