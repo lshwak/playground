@@ -5,6 +5,8 @@ var fs = require('fs');
 var sanitizeHtml = require('sanitize-html');
 var template = require('../lib/template.js');
 var auth = require('../lib/auth');
+var db = require('../lib/db');
+var shortid = require('shortid');
 
 router.get('/create', function (request, response) {
   if (!auth.isOwner(request, response)) {
@@ -35,9 +37,17 @@ router.post('/create_process', function (request, response) {
   var post = request.body;
   var title = post.title;
   var description = post.description;
-  fs.writeFile(`data/${title}`, description, 'utf8', function (err) {
-    response.redirect(`/topic/${title}`);
-  });
+  // fs.writeFile(`data/${title}`, description, 'utf8', function (err) {
+  //   response.redirect(`/topic/${title}`);
+  // });
+  var id = shortid.generate();
+  db.get('topics').push({
+    id:id,
+    title:title,
+    description:description,
+    user_id:request.user.id
+  }).write();
+  response.redirect(`/topic/${id}`);
 });
 
 router.get('/update/:pageId', function (request, response) {
