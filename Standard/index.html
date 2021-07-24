@@ -41,7 +41,21 @@
                         <a href="https://webstoryboy.co.kr">webstoryboy.co.kr</a>
                     </div>
                     <!-- //헤더 타이틀 -->
-                    <div class="header-icon"></div>
+
+                    <!-- 이미지를 표현하는 방법
+                        1. img 태그로 표현 (의미가 있을 때) / alt 태그 - 대체 문자 표현
+                        2. background 속성으로 표현 (의미가 없을 때) - 대체 문자 X
+                        3. 요즘 사이트들은 이미지를 background 속성 - 웹 표준을 준수하기 위해서는  
+                            가상으로 대체 문자를 만들어줌 (IR 효과)
+                            이미지 스프라이트 기법
+                    -->
+                    <div class="header-icon">
+                        <a href="" #="" class="icon1"><span class="ir_pm">icon1</span></a>
+                        <a href="" #="" class="icon2"><span class="ir_pm">icon2</span></a>
+                        <a href="" #="" class="icon3"><span class="ir_pm">icon3</span></a>
+                        <a href="" #="" class="icon4"><span class="ir_pm">icon4</span></a>
+                    </div>
+                    <!-- //헤더 아이콘 -->
                 </div>
             </div>
         </div>
