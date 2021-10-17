@@ -33,8 +33,18 @@
 .nav > div:last-child li {width: 100%;}
 .nav > div li::before {content: ''; width: 3px; height: 3px; background-color: #25a2d0; border-radius: 50%; position: absolute; left: 0; top: 6px;}
 .nav > div h3 {font-size: 18px; color: #25a2d0; font-weight: bold; margin-bottom: 4px;}
-
-
+.nav > div li a {position: relative;}
+.nav > div li a:after {
+    content: '';
+    display: inline-block;
+    width: 0; height: 1px;
+    background: #25aad0;
+    transition: all .2s ease-out;
+    position: absolute; bottom: 0; left: 0;
+}
+.nav > div li:hover a:after {
+    width: 100%;
+}
 
 
 
