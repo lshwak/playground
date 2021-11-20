@@ -30,7 +30,8 @@
         let lock2 = true;
         let lock3 = true;
         let lock4 = true;
-        
+        let score = 0; // shift()의 발생에 따라 점수집계
+
         class Box {
             constructor(index, x, y) {
                 // this.index = index; // box 고유번호 부여
@@ -51,14 +52,14 @@
             context.fillRect(0, 700, 410,10); // safeline
             context.fillStyle = 'rgba(0,255,0,0.05)';
             context.fillRect(0, 710, 410,50);
-
+            console.log(score);
             for (let i=0; i<boxes1.length; i++) {
                 context.fillStyle = 'rgba(255,0,0,0.8)';
                 box = boxes1[i];
                 box.y += 7;
-                console.log(lock1)
                 if (box.y > canvas.height) {
                     boxes1.shift();
+                    score-=1;
                 }
                 if (box.y > 660) {
                     lock1 = false;
@@ -74,6 +75,7 @@
                 box.y += 7;
                 if (box.y > canvas.height) {
                     boxes2.shift();
+                    score-=1;
                 }
                 if (box.y > 660) {
                     lock2 = false;
@@ -89,6 +91,7 @@
                 box.y += 7;
                 if (box.y > canvas.height) {
                     boxes3.shift();
+                    score-=1;
                 }
                 if (box.y > 660) {
                     lock3 = false;
@@ -104,6 +107,7 @@
                 box.y += 7;
                 if (box.y > canvas.height) {
                     boxes4.shift();
+                    score-=1;
                 }
                 if (box.y > 660) {
                     lock4 = false;
@@ -148,23 +152,28 @@
             // D
             if (e.keyCode == 68 && lock1==false) {
                 boxes1.shift();
+                score+=1;
                 lock1 = true; // keydown이벤트가 발생한후 다시 이벤트를 막아줘서 다음 box가 내려올때까지 기다림
             }
             // F
             if (e.keyCode == 70 && lock2==false) {
                 boxes2.shift();
+                score+=1;
                 lock2 = true;
             }
             // J
             if (e.keyCode == 74 && lock3==false) {
                 boxes3.shift();
+                score+=1;
                 lock3 = true;
             }
             // K
             if (e.keyCode == 75 && lock4==false) {
                 boxes4.shift();
+                score+=1;
                 lock4 = true;
             }
+            console.log("score="+score);
         }
         
         // function clickHandler(e) {
