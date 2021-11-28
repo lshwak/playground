@@ -12,12 +12,16 @@
         canvas{
             background: #eee;
         }
+        #sco {float: left;}
     </style>
 </head>
 <body>
+    
     <div class="row">
         <canvas class="canvas" width="410" height="770"></canvas>
     </div>
+    <div id="sco">Score:</div>
+    <div id="Score"></div>
 
     <script>
         const canvas = document.querySelector('.canvas');
@@ -53,6 +57,7 @@
             context.fillStyle = 'rgba(0,255,0,0.05)';
             context.fillRect(0, 710, 410,50);
             console.log(score);
+            document.getElementById("Score").innerHTML=score;
             for (let i=0; i<boxes1.length; i++) {
                 context.fillStyle = 'rgba(255,0,0,0.8)';
                 box = boxes1[i];
@@ -60,6 +65,8 @@
                 if (box.y > canvas.height) {
                     boxes1.shift();
                     score-=1;
+                    context.fillStyle = 'rgba(255,0,0,0.1)';
+                    context.fillRect(0,0,410,770); // 감점 될때 마다 빨간효과
                 }
                 if (box.y > 660) {
                     lock1 = false;
@@ -76,6 +83,8 @@
                 if (box.y > canvas.height) {
                     boxes2.shift();
                     score-=1;
+                    context.fillStyle = 'rgba(255,0,0,0.1)';
+                    context.fillRect(0,0,410,770); // 감점 될때 마다 빨간효과
                 }
                 if (box.y > 660) {
                     lock2 = false;
@@ -92,6 +101,8 @@
                 if (box.y > canvas.height) {
                     boxes3.shift();
                     score-=1;
+                    context.fillStyle = 'rgba(255,0,0,0.1)';
+                    context.fillRect(0,0,410,770); // 감점 될때 마다 빨간효과
                 }
                 if (box.y > 660) {
                     lock3 = false;
@@ -108,6 +119,8 @@
                 if (box.y > canvas.height) {
                     boxes4.shift();
                     score-=1;
+                    context.fillStyle = 'rgba(255,0,0,0.1)';
+                    context.fillRect(0,0,410,770); // 감점 될때 마다 빨간효과
                 }
                 if (box.y > 660) {
                     lock4 = false;
@@ -173,7 +186,6 @@
                 score+=1;
                 lock4 = true;
             }
-            console.log("score="+score);
         }
         
         // function clickHandler(e) {
