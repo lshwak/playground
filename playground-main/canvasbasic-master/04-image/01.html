@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      canvas {
+        background: #eee;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Image</h1>
+    <canvas class="canvas" width="600" height="400">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+
+    <script>
+      const canvas = document.querySelector('.canvas');
+      const context = canvas.getContext('2d');
+
+      // const imgElem = document.createElement('img'); // 이미지 불러오기
+      const imgElem = new Image();  // 생성자로 이미지 불러오기
+      imgElem.src = '../images/ilbuni1.png'; // 외부이미지라서 로딩시간 필요, 로드가 끝나야 캔버스에 그릴 수 있다.
+      imgElem.addEventListener('load', () => {
+        context.drawImage(imgElem, 50, 50); // x:50, y:50 위치에 이미지
+        context.drawImage(imgElem, 50, 50, 70, 120); // dWidth, dHeight로 크기 설정
+        context.drawImage(imgElem, 100, 100, 200, 200, 0, 0, 100, 100); // 이미지 원본의 특정부분만 크롭해서 가져오기.
+      }); // 로드가 되면 실행될 이벤트 함수
+      // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+

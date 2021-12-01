@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawing</title>
+    <style>
+        canvas {background: #eee;}
+        .color-btn {
+            width: 30px;
+            height: 30px;
+            border: 0;
+            border-radius: 50%;
+        }
+        .color-btn[data-color='black'] {background: black;}
+        .color-btn[data-color='red'] {background: red;}
+        .color-btn[data-color='green'] {background: green;}
+        .color-btn[data-color='blue'] {background: blue;}
+        .image-btn {
+            width: 40px;
+            height: 40px;
+            background: url(../images/ilbuni2.png)no-repeat 50% 50% / cover;
+        }
+        .result-image {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <h1>Drawing</h1>
+    <canvas class="canvas" width="1400" height="650">
+        이 브라우저는 캔버스를 지원하지 않습니다.
+    </canvas>
+    <div class="control">
+        <button class="color-btn" data-type="color" data-color="black"></button>
+        <button class="color-btn" data-type="color" data-color="red"></button>
+        <button class="color-btn" data-type="color" data-color="green"></button>
+        <button class="color-btn" data-type="color" data-color="blue"></button>
+        <button class="image-btn" data-type="image"></button>
+    </div>
+    <button class="save-btn">이미지 저장</button>
+    <div class="result-image"></div>
+    <script>
+        // const: 상수 , let: 변수 (var만 쓸거면 var만 쓰기)
+        const canvas = document.querySelector('.canvas');
+        const context = canvas.getContext('2d');
+        const control = document.querySelector('.control');
+        const saveBtn = document.querySelector('.save-btn');
+        const resultImage = document.querySelector('.result-image');
+        let drawingMode; // true일 때만 그리기.
+        let brush = 'color'; // 'color', 'image'
+        let colorVal = 'black'; // 색상
+
+        const imgElem = new Image();
+        imgElem.src = '../images/ilbuni2.png';
+
+        // 마우스 누르기
+        function downHandler() {
+            drawingMode = true;
+        }
+        // 마우스 떼기
+        function upHandler() {  
+            drawingMode = false;
+        }
+
+        function moveHandler(e) {
+            if (!drawingMode) return;
+
+            // console.log(e.clientX, e.clientY); // 해당 좌표는 캔버스가 아닌 브라우저 기준.
+            // console.log(e.layerX, e.layerY); // 캔버스기준 click좌표
+            
+            switch (brush) {
+                case 'color':
+                context.beginPath();
+                context.arc(e.layerX, e.layerY, 10, 0, Math.PI * 2, false);
+                context.fill();
+                    break;
+                case 'image':
+                    context.drawImage(imgElem, e.layerX, e.layerY, 50, 50);
+                    break;
+            }            
+        }
+
+        function setColor(e) {
+            brush = e.target.getAttribute('data-type');
+            colorVal = e.target.getAttribute('data-color');
+            context.fillStyle = colorVal;
+            // console.log(brush);
+        }
+
+        function createImage() {
+            const url = canvas.toDataURL('image/png');
+            const imgElem = new Image();
+            imgElem.src = url;
+            resultImage.appendChild(imgElem);
+        }
+        // addEventListener가 많으면 메모리 점유를 많이해서 페이지 성능의 악영향을 미칠 수 있다.
+        canvas.addEventListener('mousedown', downHandler);
+        canvas.addEventListener('mousemove', moveHandler);
+        canvas.addEventListener('mouseup', upHandler);
+        control.addEventListener('click', setColor);
+        saveBtn.addEventListener('click', createImage);
+    </script>
+</body>
+</html>

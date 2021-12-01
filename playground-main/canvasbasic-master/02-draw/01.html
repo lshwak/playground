@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      canvas {
+        background: #eee;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas class="canvas" width="600" height="400">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+
+    <script>
+      // fillRect : 칠하기
+      // clearRect
+      // strokeRect : 선긋기
+      const canvas = document.querySelector('.canvas'); // canvas라는 클래스를 가져옴
+      const context = canvas.getContext('2d'); // context변수 만들고 canvas객체에 getContext()메소드 호출
+      // 여기까지가 기본적인 셋팅
+      context.fillRect(50, 50, 100, 100); // 좌측상단 기준 x:50, y:50 좌표에 100크기 사각형. 색은 기본 black
+      context.fillStyle = 'red';
+      context.fillRect(0, 0, 100, 100); // fillStyle로 인해 red로 출력
+      context.clearRect(80, 80, 50, 50); // 해당 영역 지우기 
+      context.strokeRect(150, 150, 100, 100);
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+

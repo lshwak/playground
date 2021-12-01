@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transform2</title>
+    <style>
+        .canvas {
+            background: #eee;
+        }
+    </style>
+</head>
+<body>
+    <h1>Transform</h1>
+    <canvas class="canvas" width="1400" height="650"></canvas>
+    <script>
+        const canvas = document.querySelector('.canvas');
+        const context = canvas.getContext('2d');
+        let scaleValue = 1;
+        let rotateValue = 0;
+
+        function toRadian(d) {
+            return d * Math.PI/180;
+        }
+
+        function draw() {
+            //context.clearRect(0,0, canvas.width, canvas.height);
+            context.save();
+            context.setTransform(1,0,0,1,0,0);
+            context.translate(700,330);
+            context.scale(scaleValue, scaleValue);
+            context.rotate(toRadian(rotateValue));
+            context.strokeRect(-50,-50,100,100);
+            context.restore();
+
+            scaleValue += 0.05;
+            rotateValue += 1;
+
+            context.fillRect(10,10,30,30);
+
+            requestAnimationFrame(draw);
+        }
+
+        draw();
+        
+
+    </script>
+</body>
+</html>
