@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Breaker test</title>
+    <title>Breaker</title>
     <style>
         .row {
             padding: 0 35%;
         }
         canvas{
+            position: absolute;
             background: #eee;
         }
+        #sco {float: left;}
     </style>
 </head>
 <body>
     <div class="row">
         <canvas class="canvas" width="400" height="770"></canvas>
     </div>
-
+    <div id="sco">Score:</div>
+    <div id="Score"></div>
     <script>
         const canvas = document.querySelector('.canvas');
         const context = canvas.getContext('2d');
@@ -30,6 +33,7 @@
         let lock2 = true;
         let lock3 = true;
         let lock4 = true;
+        let score = 0; // shift()의 발생에 따라 점수집계
         
         class Box {
             constructor(index, x, y) {
@@ -48,12 +52,16 @@
             context.fillRect(0, 700, 410,10); // safeline
             context.fillStyle = 'rgba(0,255,0,0.05)';
             context.fillRect(0, 710, 410,50); // niceline
+            document.getElementById("Score").innerHTML=score; // 담긴 점수를 프레임 단위로 실시간 HTML에 도출
             for (let i=0; i<boxes1.length; i++) {
                 context.fillStyle = 'rgba(255,187,0,0.8)';
                 box = boxes1[i];
                 box.y += 7; // 한 프레임당 7픽셀씩 y축(아래)으로 이동
                 if (box.y > canvas.height) {
-                    boxes1.shift(tempX1, tempY1);
+                    boxes1.shift();
+                    score-=1; // box를 keyevent하지 못하고 아래로 지나가면 감점
+                    context.fillStyle = 'rgba(255,0,0,0.1)';
+                    context.fillRect(0,0,410,770); // 감점 될때 마다 배경 빨간충격효과
                 }
                 if (box.y > 660) {
                     lock1 = false; // safeline를 지나면 keyevent를 허용할 수 있게 lock 풀기
@@ -68,7 +76,10 @@
                 box = boxes2[i];
                 box.y += 7;
                 if (box.y > canvas.height) {
-                    boxes2.shift(tempX2, tempY2);
+                    boxes2.shift();
+                    score-=1;
+                    context.fillStyle = 'rgba(255,0,0,0.1)';
+                    context.fillRect(0,0,410,770); // 감점 될때 마다 빨간효과
                 }
                 if (box.y > 660) {
                     lock2 = false;
@@ -83,7 +94,10 @@
                 box = boxes3[i];
                 box.y += 7;
                 if (box.y > canvas.height) {
-                    boxes3.shift(tempX3, tempY3);
+                    boxes3.shift();
+                    score-=1;
+                    context.fillStyle = 'rgba(255,0,0,0.1)';
+                    context.fillRect(0,0,410,770); // 감점 될때 마다 빨간효과
                 }
                 if (box.y > 660) {
                     lock3 = false;
@@ -98,7 +112,10 @@
                 box = boxes4[i];
                 box.y += 7;
                 if (box.y > canvas.height) {
-                    boxes4.shift(tempX4, tempY4);
+                    boxes4.shift();
+                    score-=1;
+                    context.fillStyle = 'rgba(255,0,0,0.1)';
+                    context.fillRect(0,0,410,770); // 감점 될때 마다 빨간효과
                 }
                 if (box.y > 660) {
                     lock4 = false;
@@ -141,21 +158,25 @@
             // D (box에 lock이 풀렸을 때만 event 허용)
             if (e.keyCode == 68 && lock1==false) {
                 boxes1.shift();
+                score+=1; // keyevent로 box를 shift()없애면 득점
                 lock1 = true; // keydown이벤트가 발생한후 다시 이벤트를 막아줘서 다음 box가 내려올때까지 기다림
             }
             // F
             if (e.keyCode == 70 && lock2==false) {
                 boxes2.shift();
+                score+=1;
                 lock2 = true;
             }
             // J
             if (e.keyCode == 74 && lock3==false) {
                 boxes3.shift();
+                score+=1;
                 lock3 = true;
             }
             // K
             if (e.keyCode == 75 && lock4==false) {
                 boxes4.shift();
+                score+=1;
                 lock4 = true;
             } 
         }
@@ -164,10 +185,8 @@
         document.addEventListener("keydown", onButton);
         render();
         setInterval(update, 800)
+   
+
     </script>
 </body>
 </html>
-
-
-<!-- 
--->
