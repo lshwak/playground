@@ -33,7 +33,6 @@
         
         class Box {
             constructor(index, x, y) {
-                this.index = index; // box 고유번호 부여
                 this.x = x;
                 this.y = y;
                 this.draw();
@@ -49,11 +48,10 @@
             context.fillRect(0, 700, 410,10); // safeline
             context.fillStyle = 'rgba(0,255,0,0.05)';
             context.fillRect(0, 710, 410,50); // niceline
-            //let box;
             for (let i=0; i<boxes1.length; i++) {
-                context.fillStyle = 'rgba(255,0,0,0.8)';
+                context.fillStyle = 'rgba(255,187,0,0.8)';
                 box = boxes1[i];
-                box.y += 7;
+                box.y += 7; // 한 프레임당 7픽셀씩 y축(아래)으로 이동
                 if (box.y > canvas.height) {
                     boxes1.shift(tempX1, tempY1);
                 }
@@ -66,7 +64,7 @@
                 box.draw();
             }
             for (let i=0; i<boxes2.length; i++) {
-                context.fillStyle = 'rgba(0,255,0,0.8)';
+                context.fillStyle = 'rgba(18,234,255,0.8)';
                 box = boxes2[i];
                 box.y += 7;
                 if (box.y > canvas.height) {
@@ -81,7 +79,7 @@
                 box.draw();
             }
             for (let i=0; i<boxes3.length; i++) {
-                context.fillStyle = 'rgba(0,0,255,0.8)';
+                context.fillStyle = 'rgba(189,255,18,0.8)';
                 box = boxes3[i];
                 box.y += 7;
                 if (box.y > canvas.height) {
@@ -96,7 +94,7 @@
                 box.draw();
             }
             for (let i=0; i<boxes4.length; i++) {
-                context.fillStyle = 'rgba(0,0,0,0.8)';
+                context.fillStyle = 'rgba(255,18,239,0.8)';
                 box = boxes4[i];
                 box.y += 7;
                 if (box.y > canvas.height) {
