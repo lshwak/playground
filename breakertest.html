@@ -56,21 +56,20 @@
             context.fillStyle = 'rgba(255,0,0,0.05)';
             context.fillRect(0, 700, 410,10); // safeline
             context.fillStyle = 'rgba(0,255,0,0.05)';
-            context.fillRect(0, 710, 410,50);
-            console.log(score);
-            document.getElementById("Score").innerHTML=score;
+            context.fillRect(0, 710, 410,50); // niceline
+            document.getElementById("Score").innerHTML=score; // 담긴 점수를 프레임 단위로 실시간 HTML에 도출
             for (let i=0; i<boxes1.length; i++) {
                 context.fillStyle = 'rgba(255,187,0,0.8)';
                 box = boxes1[i];
-                box.y += 7;
+                box.y += 7; // 한 프레임당 7픽셀씩 y축(아래)으로 이동
                 if (box.y > canvas.height) {
                     boxes1.shift();
-                    score-=1;
+                    score-=1; // box를 keyevent하지 못하고 아래로 지나가면 감점
                     context.fillStyle = 'rgba(255,0,0,0.1)';
-                    context.fillRect(0,0,410,770); // 감점 될때 마다 빨간효과
+                    context.fillRect(0,0,410,770); // 감점 될때 마다 배경 빨간충격효과
                 }
                 if (box.y > 660) {
-                    lock1 = false;
+                    lock1 = false; // safeline를 지나면 keyevent를 허용할 수 있게 lock 풀기
                 }
                 if (box.y > 750) {
                     lock1 = true;
@@ -163,10 +162,10 @@
 
 
         function onButton(e) {
-            // D
+            // D (box에 lock이 풀렸을 때만 event 허용)
             if (e.keyCode == 68 && lock1==false) {
                 boxes1.shift();
-                score+=1;
+                score+=1; // keyevent로 box를 shift()없애면 득점
                 lock1 = true; // keydown이벤트가 발생한후 다시 이벤트를 막아줘서 다음 box가 내려올때까지 기다림
             }
             // F
@@ -210,7 +209,7 @@
         //             boxes4.shift(tempX4, tempY4);
         //         break;
         //     }
-        // });
+        // }); commit test8
         setInterval(update, 800)
         render();
         document.addEventListener("keydown", onButton);
