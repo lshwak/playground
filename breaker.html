@@ -34,6 +34,10 @@
         let lock3 = true;
         let lock4 = true;
         let score = 0; // shift()의 발생에 따라 점수집계
+        let be1 = false; // button effect. key를 눌렀을때 나타나는 색효과
+        let be2 = false;
+        let be3 = false;
+        let be4 = false;
         
         class Box {
             constructor(index, x, y) {
@@ -49,10 +53,12 @@
         function render() {
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.fillStyle = 'rgba(255,0,0,0.05)';
-            context.fillRect(0, 700, 410,10); // safeline
+            context.fillRect(0, 700, 400,10); // safeline
             context.fillStyle = 'rgba(0,255,0,0.05)';
-            context.fillRect(0, 710, 410,50); // niceline
+            context.fillRect(0, 710, 400,50); // niceline
             document.getElementById("Score").innerHTML=score; // 담긴 점수를 프레임 단위로 실시간 HTML에 도출
+            
+            // line1
             for (let i=0; i<boxes1.length; i++) {
                 context.fillStyle = 'rgba(255,187,0,0.8)';
                 box = boxes1[i];
@@ -61,7 +67,7 @@
                     boxes1.shift();
                     score-=1; // box를 keyevent하지 못하고 아래로 지나가면 감점
                     context.fillStyle = 'rgba(255,0,0,0.1)';
-                    context.fillRect(0,0,410,770); // 감점 될때 마다 배경 빨간충격효과
+                    context.fillRect(0,0,400,770); // 감점 될때 마다 배경 빨간충격효과
                 }
                 if (box.y > 660) {
                     lock1 = false; // safeline를 지나면 keyevent를 허용할 수 있게 lock 풀기
@@ -70,7 +76,9 @@
                     lock1 = true;
                 } // box가 660에서 750안에서만 lock을 false로 풀어 keydown이벤트 허용
                 box.draw();
-            }
+            } // line1
+
+            // line2
             for (let i=0; i<boxes2.length; i++) {
                 context.fillStyle = 'rgba(18,234,255,0.8)';
                 box = boxes2[i];
@@ -79,7 +87,7 @@
                     boxes2.shift();
                     score-=1;
                     context.fillStyle = 'rgba(255,0,0,0.1)';
-                    context.fillRect(0,0,410,770); // 감점 될때 마다 빨간효과
+                    context.fillRect(0,0,400,770); // 감점 될때 마다 빨간효과
                 }
                 if (box.y > 660) {
                     lock2 = false;
@@ -88,7 +96,9 @@
                     lock2 = true;
                 }
                 box.draw();
-            }
+            } // line2
+
+            //line3
             for (let i=0; i<boxes3.length; i++) {
                 context.fillStyle = 'rgba(189,255,18,0.8)';
                 box = boxes3[i];
@@ -97,7 +107,7 @@
                     boxes3.shift();
                     score-=1;
                     context.fillStyle = 'rgba(255,0,0,0.1)';
-                    context.fillRect(0,0,410,770); // 감점 될때 마다 빨간효과
+                    context.fillRect(0,0,400,770); // 감점 될때 마다 빨간효과
                 }
                 if (box.y > 660) {
                     lock3 = false;
@@ -106,7 +116,9 @@
                     lock3 = true;
                 }
                 box.draw();
-            }
+            } //line3
+
+            // line4
             for (let i=0; i<boxes4.length; i++) {
                 context.fillStyle = 'rgba(255,18,239,0.8)';
                 box = boxes4[i];
@@ -115,7 +127,7 @@
                     boxes4.shift();
                     score-=1;
                     context.fillStyle = 'rgba(255,0,0,0.1)';
-                    context.fillRect(0,0,410,770); // 감점 될때 마다 빨간효과
+                    context.fillRect(0,0,400,770); // 감점 될때 마다 빨간효과
                 }
                 if (box.y > 660) {
                     lock4 = false;
@@ -124,7 +136,26 @@
                     lock4 = true;
                 }
                 box.draw();
+            } // line4
+
+            if (be1 == true) {
+                context.fillStyle = 'rgba(255,187,0,0.1)';
+                context.fillRect(0,0,100,700);
             }
+            if (be2 == true) {
+                context.fillStyle = 'rgba(18,234,255,0.1)';
+                context.fillRect(100,0,100,700);
+            }
+            if (be3 == true) {
+                context.fillStyle = 'rgba(189,255,18,0.1)';
+                context.fillRect(200,0,100,700);
+            }
+            if (be4 == true) {
+                context.fillStyle = 'rgba(255,18,239,0.1)';
+                context.fillRect(300,0,100,700);
+            }
+            // 버튼을 눌렀을 때 각 리인에 각색이 켜지도록 true.
+
             requestAnimationFrame(render);   
         }   
     
@@ -154,6 +185,7 @@
         }
 
 
+        // keydown
         function onButton(e) {
             // D (box에 lock이 풀렸을 때만 event 허용)
             if (e.keyCode == 68 && lock1==false) {
@@ -179,13 +211,52 @@
                 score+=1;
                 lock4 = true;
             } 
+
+            // D
+            if (e.keyCode == 68) {
+                be1 = true; // D를 눌렀을 때 색이 들어오게끔 true
+            }
+            // F
+            if (e.keyCode == 70) {
+                be2 = true; 
+            }
+            // J
+            if (e.keyCode == 74) {
+                be3 = true;
+            }
+            // K
+            if (e.keyCode == 75) {
+                be4 = true;
+            }
+
+        }
+
+        // keyup
+        function keyUp(e) {
+            // D
+            if (e.keyCode == 68) {
+                be1 = false // 버튼를 떼면 색이 다시 꺼지게끔 false
+            }
+            // F
+            if (e.keyCode == 70) {
+                be2 = false
+            }
+            // J
+            if (e.keyCode == 74) {
+                be3 = false
+            }
+            // K
+            if (e.keyCode == 75) {
+                be4 = false
+            }
         }
         
         
         document.addEventListener("keydown", onButton);
-        render();
+        document.addEventListener("keyup", keyUp);
         setInterval(update, 800)
-   
+        render();
+        
 
     </script>
 </body>
