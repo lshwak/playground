@@ -53,7 +53,7 @@
                 // context.fillStyle = '#fff';
                 // context.fillText(this.index, this.x+45, this.y+13);
             }
-        }
+        } // class box
         
         function render() {
             context.clearRect(0, 0, canvas.width, canvas.height);
@@ -159,11 +159,12 @@
                 context.fillStyle = 'rgba(255,18,239,0.1)';
                 context.fillRect(300,0,100,700);
             }
+            // 버튼을 눌렀을 때 각 리인에 각색이 켜지도록 true.
             requestAnimationFrame(render);
-        }   
-        
+        } // render()
         let tempX1, tempY1, tempX2, tempY2, tempX3, tempY3, tempX4, tempY4;
 
+        // 떨어질 박스를 생성할 update함수
         function update() {    
             for (let i = 0; i < 1; i++) {
                 tempX1 = canvas.width * 0; // x축 랜덤 생성
@@ -185,7 +186,7 @@
                 tempY4 = Math.random() * canvas.height * -0.4; // y축 랜덤 생성
                 boxes4.push(new Box(i, tempX4, tempY4));
             }
-        }
+        } // update()
         
         
 
@@ -216,36 +217,52 @@
                 lock4 = true;
             }
 
+            // D
             if (e.keyCode == 68) {
-                be1 = true;
+                be1 = true; // D를 눌렀을 때 색이 들어오게끔 true
             }
+            // F
             if (e.keyCode == 70) {
                 be2 = true;
             }
+            // J
             if (e.keyCode == 74) {
                 be3 = true;
             }
+            // K
             if (e.keyCode == 75) {
                 be4 = true;
             }
             
-        }
+        } // keydown()
 
+        // keyup
         function keyUp(e) {
+            // D
             if (e.keyCode == 68) {
-                be1 = false
+                be1 = false // 버튼를 떼면 색이 다시 꺼지게끔 false
             }
+            // F
             if (e.keyCode == 70) {
                 be2 = false
             }
+            // J
             if (e.keyCode == 74) {
                 be3 = false
             }
+            // K
             if (e.keyCode == 75) {
                 be4 = false
             }
-        }
+        } // keyup()
         
+        
+        document.addEventListener("keydown", onButton);
+        document.addEventListener("keyup", keyUp);
+        setInterval(update, 800);
+        render();
+        
+
         // function clickHandler(e) {
         //     console.log(e.layerY)
         // }
@@ -267,13 +284,7 @@
         //             boxes4.shift(tempX4, tempY4);
         //         break;
         //     }
-        // }); commit test8
-        
-        document.addEventListener("keydown", onButton);
-        document.addEventListener("keyup", keyUp);
-        setInterval(update, 800)
-        render();
-        
+        // });
 
     </script>
 </body>
