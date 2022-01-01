@@ -262,29 +262,30 @@
         setInterval(update, 800);
         render();
         
+        /* key event를 switch case로도 시도.
+        function clickHandler(e) {
+            console.log(e.layerY)
+        }
+        canvas.addEventListener('click', clickHandler);
 
-        // function clickHandler(e) {
-        //     console.log(e.layerY)
-        // }
-        // canvas.addEventListener('click', clickHandler);
 
-
-        // document.addEventListener("keydown", e =>{
-        //     switch(e.keyCode){
-        //         case 68:
-        //             boxes1.shift(tempX1, tempY1); // 배열 앞 순서부터 제거
-        //         break;
-        //         case 70:
-        //             boxes2.shift(tempX2, tempY2);
-        //         break;
-        //         case 74:
-        //             boxes3.shift(tempX3, tempY3);
-        //         break;
-        //         case 75:
-        //             boxes4.shift(tempX4, tempY4);
-        //         break;
-        //     }
-        // });
+        document.addEventListener("keydown", e =>{
+            switch(e.keyCode){
+                case 68:
+                    boxes1.shift(tempX1, tempY1); // 배열 앞 순서부터 제거
+                break;
+                case 70:
+                    boxes2.shift(tempX2, tempY2);
+                break;
+                case 74:
+                    boxes3.shift(tempX3, tempY3);
+                break;
+                case 75:
+                    boxes4.shift(tempX4, tempY4);
+                break;
+            }
+        });
+        */
 
     </script>
 </body>
