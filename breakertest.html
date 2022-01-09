@@ -14,7 +14,8 @@
             background: #eee;
         }
         #sco {float: left;}
-        
+        #score-text {font-weight: bold; font-size: 50px;}
+        #Score {font-weight: bold; font-size: 50px;}
     </style>
 </head>
 <body>
@@ -22,7 +23,7 @@
     <div class="row">
         <canvas class="canvas" width="400" height="770"></canvas>
     </div>
-    <div id="sco">Score:</div>
+    <div id="sco"><span id="score-text">Score:</span></div>
     <div id="Score"></div> <!-- 집계된 점수 -->
     <script>
         const canvas = document.querySelector('.canvas');
