@@ -8,7 +8,7 @@ let charArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','x','t','u','v','w','x','y','z',
 '1','2','3','4','5','6','7','8','9','0']
 
-let maxCharCount = 1000;
+let maxCharCount = 100;
 let fallingCharArr = [];
 let fontSize = 15;
 let maxColumns = cw / fontSize;
@@ -32,6 +32,12 @@ class FallingChar {
         ctx.font = fontSize + "px san-serif"
         ctx.fillText(this.value, this.x, this.y)
         this.y += this.speed;
+        
+        if (this.y > ch) {
+            this.y = Math.random() * ch/2 - 50
+            this.x = Math.floor(Math.random() * maxColumns) * fontSize
+            this.speed = (-Math.random() * fontSize * 3) / 4 + (fontSize * 3) / 4;
+        }
     }
 }
 
