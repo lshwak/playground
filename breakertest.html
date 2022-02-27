@@ -64,9 +64,11 @@
             context.fillStyle = 'rgba(0,255,0,0.05)';
             context.fillRect(0, 660, 400,50); // niceline
             // document.getElementById("Score").innerHTML=score; // 담긴 점수를 프레임 단위로 실시간 HTML에 도출
+            // 점수를 캔버스 상단에 출력
             context.font = '20px Arial';
             context.fillStyle = '#00FF42';
             context.fillText("Score: " + score, 0, 20);
+            
             // line1
             for (let i=0; i<boxes1.length; i++) {
                 context.fillStyle = 'rgba(255,187,0,0.8)';
@@ -147,6 +149,7 @@
                 box.draw();
             } // line4
             
+            // 버튼UI
             context.fillStyle = 'rgba(212,212,212,1)';
             context.fillRect(0,710,400,60);
             context.fillStyle = 'rgba(255,187,0,1)';
@@ -209,7 +212,7 @@
             }
         } // update()
         
-        
+        // 소리효과
         let dow = new Audio('sound/do.mp3');
         let re = new Audio('sound/re.mp3');
         let mi = new Audio('sound/mi.mp3');
