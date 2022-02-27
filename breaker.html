@@ -202,30 +202,39 @@
             }
         } // update()
 
+        // 소리효과
+        let dow = new Audio('sound/do.mp3');
+        let re = new Audio('sound/re.mp3');
+        let mi = new Audio('sound/mi.mp3');
+        let fa = new Audio('sound/fa.mp3');
 
         // keydown
         function onButton(e) {
             // D (box에 lock이 풀렸을 때만 event 허용)
             if (e.keyCode == 68 && lock1==false) {
                 boxes1.shift();
+                dow.play(); // keyevent 성공 시 소리 출력
                 score+=1; // keyevent로 box를 shift()없애면 득점
                 lock1 = true; // keydown이벤트가 발생한후 다시 이벤트를 막아줘서 다음 box가 내려올때까지 기다림
             }
             // F
             if (e.keyCode == 70 && lock2==false) {
                 boxes2.shift();
+                re.play();
                 score+=1;
                 lock2 = true;
             }
             // J
             if (e.keyCode == 74 && lock3==false) {
                 boxes3.shift();
+                mi.play();
                 score+=1;
                 lock3 = true;
             }
             // K
             if (e.keyCode == 75 && lock4==false) {
                 boxes4.shift();
+                fa.play();
                 score+=1;
                 lock4 = true;
             } 
