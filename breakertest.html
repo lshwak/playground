@@ -13,9 +13,9 @@
             position: absolute;
             background: #eee;
         }
-        #sco {float: left;}
+        /* #sco {float: left;}
         #score-text {font-weight: bold; font-size: 50px;}
-        #Score {font-weight: bold; font-size: 50px;}
+        #Score {font-weight: bold; font-size: 50px;} */
     </style>
 </head>
 <body>
@@ -23,8 +23,8 @@
     <div class="row">
         <canvas class="canvas" width="400" height="770"></canvas>
     </div>
-    <div id="sco"><span id="score-text">Score:</span></div>
-    <div id="Score"></div> <!-- 집계된 점수 -->
+    <!-- <div id="sco"><span id="score-text">Score:</span></div>
+    <div id="Score"></div> 집계된 점수 -->
     <script>
         const canvas = document.querySelector('.canvas');
         const context = canvas.getContext('2d');
@@ -51,6 +51,7 @@
             }
             draw() {
                 context.fillRect(this.x, this.y, 100, 20); // 넓이100, 두께20의 박스
+                
                 // context.fillStyle = '#fff';
                 // context.fillText(this.index, this.x+45, this.y+13);
             }
@@ -62,13 +63,15 @@
             context.fillRect(0, 650, 400,10); // safeline
             context.fillStyle = 'rgba(0,255,0,0.05)';
             context.fillRect(0, 660, 400,50); // niceline
-            document.getElementById("Score").innerHTML=score; // 담긴 점수를 프레임 단위로 실시간 HTML에 도출
-            
+            // document.getElementById("Score").innerHTML=score; // 담긴 점수를 프레임 단위로 실시간 HTML에 도출
+            context.font = '20px Arial';
+            context.fillStyle = '#00FF42';
+            context.fillText("Score: " + score, 0, 20);
             // line1
             for (let i=0; i<boxes1.length; i++) {
                 context.fillStyle = 'rgba(255,187,0,0.8)';
                 box = boxes1[i];
-                box.y += 7; // 한 프레임당 7픽셀씩 y축(아래)으로 이동
+                box.y += 4; // 한 프레임당 7픽셀씩 y축(아래)으로 이동
                 if (box.y > 720) {
                     boxes1.shift();
                     score-=1; // box를 keyevent하지 못하고 아래로 지나가면 감점
@@ -88,7 +91,7 @@
             for (let i=0; i<boxes2.length; i++) {
                 context.fillStyle = 'rgba(18,234,255,0.8)';
                 box = boxes2[i];
-                box.y += 7;
+                box.y += 4;
                 if (box.y > 720) {
                     boxes2.shift();
                     score-=1;
@@ -108,7 +111,7 @@
             for (let i=0; i<boxes3.length; i++) {
                 context.fillStyle = 'rgba(189,255,18,0.8)';
                 box = boxes3[i];
-                box.y += 7;
+                box.y += 4;
                 if (box.y > 720) {
                     boxes3.shift();
                     score-=1;
@@ -128,7 +131,7 @@
             for (let i=0; i<boxes4.length; i++) {
                 context.fillStyle = 'rgba(255,18,239,0.8)';
                 box = boxes4[i];
-                box.y += 7;
+                box.y += 4;
                 if (box.y > 720) {
                     boxes4.shift();
                     score-=1;
@@ -144,7 +147,7 @@
                 box.draw();
             } // line4
             
-            context.fillStyle = 'rgba(237,174,255,1)';
+            context.fillStyle = 'rgba(212,212,212,1)';
             context.fillRect(0,710,400,60);
             context.fillStyle = 'rgba(255,187,0,1)';
             context.fillRect(10,720,80,40);
@@ -154,6 +157,12 @@
             context.fillRect(210,720,80,40);
             context.fillStyle = 'rgba(255,18,239,1)';
             context.fillRect(310,720,80,40);
+            context.font = '20px Arial';
+            context.fillStyle = '#fff';
+            context.fillText("D",43,747);
+            context.fillText("F",143,747);
+            context.fillText("J",243,747);
+            context.fillText("K",343,747);
 
             if (be1 == true) {
                 context.fillStyle = 'rgba(255,187,0,0.1)';
@@ -179,22 +188,22 @@
         // 떨어질 박스를 생성할 update함수
         function update() {    
             for (let i = 0; i < 1; i++) {
-                tempX1 = canvas.width * 0; // x축 랜덤 생성
+                tempX1 = 0; // x축 랜덤 생성
                 tempY1 = Math.random() * canvas.height * -0.4; // y축 랜덤 생성
                 boxes1.push(new Box(i, tempX1, tempY1));
             }
             for (let i = 0; i < 1; i++) {
-                tempX2 = canvas.width * 0.25; // x축 랜덤 생성
+                tempX2 = 100; // x축 랜덤 생성
                 tempY2 = Math.random() * canvas.height * -0.4; // y축 랜덤 생성
                 boxes2.push(new Box(i, tempX2, tempY2));
             }
             for (let i = 0; i < 1; i++) {
-                tempX3 = canvas.width * 0.5; // x축 랜덤 생성
+                tempX3 = 200; // x축 랜덤 생성
                 tempY3 = Math.random() * canvas.height * -0.4; // y축 랜덤 생성
                 boxes3.push(new Box(i, tempX3, tempY3));
             }
             for (let i = 0; i < 1; i++) {
-                tempX4 = canvas.width * 0.75; // x축 랜덤 생성
+                tempX4 = 300; // x축 랜덤 생성
                 tempY4 = Math.random() * canvas.height * -0.4; // y축 랜덤 생성
                 boxes4.push(new Box(i, tempX4, tempY4));
             }
