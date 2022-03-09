@@ -289,31 +289,32 @@
 
         // touchDown
         canvas.onmousedown = function touchDown(e) {
+            // 캔버스영역을 기준으로 한 마우스 클릭 좌표
             const x = event.clientX - context.canvas.offsetLeft;
             const y = event.clientY - context.canvas.offsetTop;
 
-            // D
+            // D 영역
             if (x > 10 && x < 80 && y > 720 && y < 760 && lock1 == false) {
                 boxes1.shift();
-                dow.play(); // keyevent 성공 시 소리 출력
-                score+=1; // keyevent로 box를 shift()없애면 득점
-                lock1 = true; // keydown이벤트가 발생한후 다시 이벤트를 막아줘서 다음 box가 내려올때까지 기다림
+                dow.play(); // event 성공 시 소리 출력
+                score+=1; // event로 box를 shift()없애면 득점
+                lock1 = true; // 이벤트가 발생한후 다시 이벤트를 막아줘서 다음 box가 내려올때까지 기다림
             }
-            // F
+            // F 영역
             if (x > 110 && x < 190 && y > 720 && y < 760 && lock2 == false) {
                 boxes2.shift();
                 re.play();
                 score+=1;
                 lock2 = true;
             }
-            // J
+            // J 영역
             if (x > 210 && x < 290 && y > 720 && y < 760 && lock3 == false) {
                 boxes3.shift();
                 mi.play();
                 score+=1;
                 lock3 = true;
             }
-            // K
+            // K 영역
             if (x > 310 && x < 390 && y > 720 && y < 760 && lock4 == false) {
                 boxes4.shift();
                 fa.play();
@@ -321,22 +322,22 @@
                 lock4 = true;
             }
 
-            // D
+            // D 영역
             if (x > 10 && x < 80 && y > 720 && y < 760) {
                 be1 = true;
                 console.log("D");
             }
-            // F
+            // F 영역
             if (x > 110 && x < 190 && y > 720 && y < 760) {
                 be2 = true;
                 console.log("F");
             }
-            // J
+            // J 영역
             if (x > 210 && x < 290 && y > 720 && y < 760) {
                 be3 = true;
                 console.log("J");
             }
-            // K
+            // K 영역
             if (x > 310 && x < 390 && y > 720 && y < 760) {
                 be4 = true;
                 console.log("K");
@@ -345,9 +346,10 @@
 
         // touchUp
         canvas.onmouseup = function touchUp(e) {
+            // 캔버스영역을 기준으로 한 마우스 클릭 좌표
             const x = event.clientX - context.canvas.offsetLeft;
             const y = event.clientY - context.canvas.offsetTop;
-            if (x > 0 && x < 400 && y > 0 && y < 770) {
+            if (x > 0 && x < 400 && y > 0 && y < 770) { // 캔버스 전 영역에서 마우스를 클릭을 떼면 버튼효과 false
                 be1 = false;
                 be2 = false;
                 be3 = false;
