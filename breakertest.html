@@ -6,11 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Breaker Test</title>
     <style>
-        .row {
-            padding: 0 35%;
-        }
         canvas{
-            position: absolute;
+            padding: 0;
+            margin: 0 auto;
+            display: block;
             background: #eee;
         }
         /* #sco {float: left;}
@@ -73,7 +72,7 @@
             for (let i=0; i<boxes1.length; i++) {
                 context.fillStyle = 'rgba(255,187,0,0.8)';
                 box = boxes1[i];
-                box.y += 7; // 한 프레임당 7픽셀씩 y축(아래)으로 이동
+                box.y += 3; // 한 프레임당 7픽셀씩 y축(아래)으로 이동
                 if (box.y > 720) {
                     boxes1.shift();
                     score-=1; // box를 keyevent하지 못하고 아래로 지나가면 감점
@@ -93,7 +92,7 @@
             for (let i=0; i<boxes2.length; i++) {
                 context.fillStyle = 'rgba(18,234,255,0.8)';
                 box = boxes2[i];
-                box.y += 7;
+                box.y += 3;
                 if (box.y > 720) {
                     boxes2.shift();
                     score-=1;
@@ -113,7 +112,7 @@
             for (let i=0; i<boxes3.length; i++) {
                 context.fillStyle = 'rgba(189,255,18,0.8)';
                 box = boxes3[i];
-                box.y += 7;
+                box.y += 3;
                 if (box.y > 720) {
                     boxes3.shift();
                     score-=1;
@@ -133,7 +132,7 @@
             for (let i=0; i<boxes4.length; i++) {
                 context.fillStyle = 'rgba(255,18,239,0.8)';
                 box = boxes4[i];
-                box.y += 7;
+                box.y += 3;
                 if (box.y > 720) {
                     boxes4.shift();
                     score-=1;
