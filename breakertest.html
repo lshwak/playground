@@ -84,7 +84,7 @@
                 }
                 if (box.y > 700) {
                     lock1 = true;
-                } // box가 660에서 750안에서만 lock을 false로 풀어 keydown이벤트 허용
+                } // box가 660에서 750안에서만 lock을 false로 풀어 keydown이벤트 허용                
                 box.draw();
             } // line1
 
@@ -287,11 +287,11 @@
             }
         } // keyup()
 
-        // touchDown
-        canvas.onmousedown = function touchDown(e) {
+        // mouseDown
+        canvas.onmousedown = function mouseDown(e) {
             // 캔버스영역을 기준으로 한 마우스 클릭 좌표
-            const x = event.clientX - context.canvas.offsetLeft;
-            const y = event.clientY - context.canvas.offsetTop;
+            const x = e.clientX - context.canvas.offsetLeft;
+            const y = e.clientY - context.canvas.offsetTop;
 
             // D 영역
             if (x > 10 && x < 80 && y > 720 && y < 760 && lock1 == false) {
@@ -342,25 +342,98 @@
                 be4 = true;
                 console.log("K");
             }
-        } // touchDown()
+        } // mouseDown()
 
-        // touchUp
-        canvas.onmouseup = function touchUp(e) {
+        // mouseUp
+        canvas.onmouseup = function mouseUp(e) {
             // 캔버스영역을 기준으로 한 마우스 클릭 좌표
-            const x = event.clientX - context.canvas.offsetLeft;
-            const y = event.clientY - context.canvas.offsetTop;
+            const x = e.clientX - context.canvas.offsetLeft;
+            const y = e.clientY - context.canvas.offsetTop;
             if (x > 0 && x < 400 && y > 0 && y < 770) { // 캔버스 전 영역에서 마우스를 클릭을 떼면 버튼효과 false
                 be1 = false;
                 be2 = false;
                 be3 = false;
                 be4 = false;
             }
-        }// touchUp()
+        }// mouseUp()
         
+
+        /*
+        function touchDown (e) {
+            // 캔버스영역을 기준으로 한 마우스 클릭 좌표
+            const x = e.clientX - context.canvas.offsetLeft;
+            const y = e.clientY - context.canvas.offsetTop;
+
+            // D 영역
+            if (x > 10 && x < 80 && y > 720 && y < 760 && lock1 == false) {
+                boxes1.shift();
+                dow.play(); // event 성공 시 소리 출력
+                score+=1; // event로 box를 shift()없애면 득점
+                lock1 = true; // 이벤트가 발생한후 다시 이벤트를 막아줘서 다음 box가 내려올때까지 기다림
+            }
+            // F 영역
+            if (x > 110 && x < 190 && y > 720 && y < 760 && lock2 == false) {
+                boxes2.shift();
+                re.play();
+                score+=1;
+                lock2 = true;
+            }
+            // J 영역
+            if (x > 210 && x < 290 && y > 720 && y < 760 && lock3 == false) {
+                boxes3.shift();
+                mi.play();
+                score+=1;
+                lock3 = true;
+            }
+            // K 영역
+            if (x > 310 && x < 390 && y > 720 && y < 760 && lock4 == false) {
+                boxes4.shift();
+                fa.play();
+                score+=1;
+                lock4 = true;
+            }
+
+            // D 영역
+            if (x > 10 && x < 80 && y > 720 && y < 760) {
+                be1 = true;
+                console.log("D");
+            }
+            // F 영역
+            if (x > 110 && x < 190 && y > 720 && y < 760) {
+                be2 = true;
+                console.log("F");
+            }
+            // J 영역
+            if (x > 210 && x < 290 && y > 720 && y < 760) {
+                be3 = true;
+                console.log("J");
+            }
+            // K 영역
+            if (x > 310 && x < 390 && y > 720 && y < 760) {
+                be4 = true;
+                console.log("K");
+            }
+        }
+
+        function touchUp (e) {
+            // 캔버스영역을 기준으로 한 마우스 클릭 좌표
+            const x = e.clientX - context.canvas.offsetLeft;
+            const y = e.clientY - context.canvas.offsetTop;
+            if (x > 0 && x < 400 && y > 0 && y < 770) { // 캔버스 전 영역에서 마우스를 클릭을 떼면 버튼효과 false
+                be1 = false;
+                be2 = false;
+                be3 = false;
+                be4 = false;
+            }
+        }
+
+
+        canvas.addEventListener("ontouchstart", touchDown);
+        canvas.addEventListener("ontouchend", touchUp); */
         document.addEventListener("keydown", onButton);
         document.addEventListener("keyup", keyUp);
         setInterval(update, 800);
-        render();
+        render()
         
         /* key event를 switch case로도 시도.
         function clickHandler(e) {
