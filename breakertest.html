@@ -84,7 +84,10 @@
                 }
                 if (box.y > 700) {
                     lock1 = true;
-                } // box가 660에서 750안에서만 lock을 false로 풀어 keydown이벤트 허용                
+                } // box가 660에서 750안에서만 lock을 false로 풀어 keydown이벤트 허용
+                if (score >= 10) {
+                    box.y += 0.5;
+                }        
                 box.draw();
             } // line1
 
