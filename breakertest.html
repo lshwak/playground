@@ -31,15 +31,18 @@
         const boxes2 = []; // keycode F가 통하는 두번째 box라인
         const boxes3 = []; // keycode J가 통하는 세번째 box라인
         const boxes4 = []; // keycode K가 통하는 네번째 box라인
+        const speed = 3;
         let lock1 = true; // 기본값 true로 box가 내려올때 까지 keydown(e)막기위한 잠금변수
         let lock2 = true;
         let lock3 = true;
         let lock4 = true;
         let score = 0; // shift()의 발생에 따라 점수집계
+        let failcount = 0; // box가 keyevent를 거치지 않고 shift 될 때마다 카운트.
         let be1 = false; // button effect key를 눌렀을때 나타나는 색효과
         let be2 = false;
         let be3 = false;
         let be4 = false;
+        let raf; // requestAnimationFrame 프레임의 go, stop을 통제하기 위한 변수.
 
         class Box {
             constructor(index, x, y) {
@@ -72,10 +75,11 @@
             for (let i=0; i<boxes1.length; i++) {
                 context.fillStyle = 'rgba(255,187,0,0.8)';
                 box = boxes1[i];
-                box.y += 3; // 한 프레임당 7픽셀씩 y축(아래)으로 이동
+                box.y += speed; // 한 프레임당 7픽셀씩 y축(아래)으로 이동
                 if (box.y > 720) {
                     boxes1.shift();
                     score-=1; // box를 keyevent하지 못하고 아래로 지나가면 감점
+                    failcount++; // score가 떨어질때마다 실패한 횟수 세기.
                     context.fillStyle = 'rgba(255,0,0,0.1)';
                     context.fillRect(0,0,400,770); // 감점 될때 마다 배경 빨간충격효과
                 }
@@ -85,17 +89,18 @@
                 if (box.y > 700) {
                     lock1 = true;
                 } // box가 660에서 750안에서만 lock을 false로 풀어 keydown이벤트 허용  
-                box.draw();
+                box.draw();                
             } // line1
 
             // line2
             for (let i=0; i<boxes2.length; i++) {
                 context.fillStyle = 'rgba(18,234,255,0.8)';
                 box = boxes2[i];
-                box.y += 3;
+                box.y += speed;
                 if (box.y > 720) {
                     boxes2.shift();
                     score-=1;
+                    failcount++; // score가 떨어질때마다 실패한 횟수 세기.
                     context.fillStyle = 'rgba(255,0,0,0.1)';
                     context.fillRect(0,0,400,770); // 감점 될때 마다 빨간효과
                 }
@@ -105,17 +110,18 @@
                 if (box.y > 700) {
                     lock2 = true;
                 }
-                box.draw();
+                box.draw();                
             } // line2
 
             // line3
             for (let i=0; i<boxes3.length; i++) {
                 context.fillStyle = 'rgba(189,255,18,0.8)';
                 box = boxes3[i];
-                box.y += 3;
+                box.y += speed;
                 if (box.y > 720) {
                     boxes3.shift();
                     score-=1;
+                    failcount++; // score가 떨어질때마다 실패한 횟수 세기.
                     context.fillStyle = 'rgba(255,0,0,0.1)';
                     context.fillRect(0,0,400,770); // 감점 될때 마다 빨간효과
                 }
@@ -125,17 +131,18 @@
                 if (box.y > 700) {
                     lock3 = true;
                 }
-                box.draw();
+                box.draw();                
             } // line3
 
             // line4
             for (let i=0; i<boxes4.length; i++) {
                 context.fillStyle = 'rgba(255,18,239,0.8)';
                 box = boxes4[i];
-                box.y += 3;
+                box.y += speed;
                 if (box.y > 720) {
                     boxes4.shift();
                     score-=1;
+                    failcount++; // score가 떨어질때마다 실패한 횟수 세기.
                     context.fillStyle = 'rgba(255,0,0,0.1)';
                     context.fillRect(0,0,400,770); // 감점 될때 마다 빨간효과
                 }
@@ -145,7 +152,7 @@
                 if (box.y > 700) {
                     lock4 = true;
                 }
-                box.draw();
+                box.draw();                
             } // line4
             
             // 버튼UI
@@ -182,8 +189,11 @@
                 context.fillStyle = 'rgba(255,18,239,0.1)';
                 context.fillRect(300,0,100,650);
             }
-            // 버튼을 눌렀을 때 각 리인에 각색이 켜지도록 true.
-            requestAnimationFrame(render);
+            // 버튼을 눌렀을 때 각 리인에 각색이 켜지도록 true.            
+            raf = requestAnimationFrame(render);
+            if (failcount > 5) {
+                cancelAnimationFrame(raf);
+            }
         } // render()
         let tempX1, tempY1, tempX2, tempY2, tempX3, tempY3, tempX4, tempY4;
 
@@ -264,6 +274,10 @@
             if (e.keyCode == 75) {
                 be4 = true;
             }
+            // B 눌러서 render 실행 (여러번 누르면 버그발생)
+            if (e.keyCode == 66) {
+                render()
+            }
             
         } // keydown()
 
@@ -325,22 +339,18 @@
             // D 영역
             if (x > 10 && x < 80 && y > 720 && y < 760) {
                 be1 = true;
-                console.log("D");
             }
             // F 영역
             if (x > 110 && x < 190 && y > 720 && y < 760) {
                 be2 = true;
-                console.log("F");
             }
             // J 영역
             if (x > 210 && x < 290 && y > 720 && y < 760) {
                 be3 = true;
-                console.log("J");
             }
             // K 영역
             if (x > 310 && x < 390 && y > 720 && y < 760) {
                 be4 = true;
-                console.log("K");
             }
         } // mouseDown()
 
@@ -433,8 +443,7 @@
         document.addEventListener("keydown", onButton);
         document.addEventListener("keyup", keyUp);
         setInterval(update, 800);
-        render()
-        
+        //render()
         /* key event를 switch case로도 시도.
         function clickHandler(e) {
             console.log(e.layerY)
