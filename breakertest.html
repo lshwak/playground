@@ -43,7 +43,7 @@
         let be3 = false;
         let be4 = false;
         let raf; // requestAnimationFrame 프레임의 go, stop을 통제하기 위한 변수.
-        let start = false;
+        let start = false; // 시작하면 true로 변환해 시작key 중복을 막기.
 
         class Box {
             constructor(index, x, y) {
@@ -288,6 +288,7 @@
                 start = true;
                 console.log(start);
                 render()
+                setInterval(update, 800);
             }
             
         } // keydown()
@@ -453,7 +454,7 @@
         canvas.addEventListener("ontouchend", touchUp); */
         document.addEventListener("keydown", onButton);
         document.addEventListener("keyup", keyUp);
-        setInterval(update, 800);
+        //setInterval(update, 800);
         //render()
         /* key event를 switch case로도 시도.
         function clickHandler(e) {
