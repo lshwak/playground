@@ -43,6 +43,7 @@
         let be3 = false;
         let be4 = false;
         let raf; // requestAnimationFrame 프레임의 go, stop을 통제하기 위한 변수.
+        let start = false;
 
         class Box {
             constructor(index, x, y) {
@@ -83,6 +84,11 @@
                     context.fillStyle = 'rgba(255,0,0,0.1)';
                     context.fillRect(0,0,400,770); // 감점 될때 마다 배경 빨간충격효과
                 }
+
+                if (score > 10) {
+                    box.y +1;
+                }
+
                 if (box.y > 610) {
                     lock1 = false; // safeline를 지나면 keyevent를 허용할 수 있게 lock 풀기
                 }
@@ -91,7 +97,6 @@
                 } // box가 660에서 750안에서만 lock을 false로 풀어 keydown이벤트 허용  
                 box.draw();                
             } // line1
-
             // line2
             for (let i=0; i<boxes2.length; i++) {
                 context.fillStyle = 'rgba(18,234,255,0.8)';
@@ -154,6 +159,7 @@
                 }
                 box.draw();                
             } // line4
+        
             
             // 버튼UI
             context.fillStyle = 'rgba(212,212,212,1)';
@@ -193,8 +199,11 @@
             raf = requestAnimationFrame(render);
             if (failcount > 5) {
                 cancelAnimationFrame(raf);
+                start = false;
+                console.log(start);
             }
-        } // render()
+        } 
+        // render()
         let tempX1, tempY1, tempX2, tempY2, tempX3, tempY3, tempX4, tempY4;
 
         // 떨어질 박스를 생성할 update함수
@@ -274,8 +283,10 @@
             if (e.keyCode == 75) {
                 be4 = true;
             }
-            // B 눌러서 render 실행 (여러번 누르면 버그발생)
-            if (e.keyCode == 66) {
+            // B 눌러서 render 실행
+            if (e.keyCode == 66 && start == false) {
+                start = true;
+                console.log(start);
                 render()
             }
             
