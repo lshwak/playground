@@ -21,6 +21,7 @@
     
     
         <canvas class="canvas" width="400" height="770"></canvas>
+        <script src="Box.js"></script>
     
     <!-- <div id="sco"><span id="score-text">Score:</span></div>
     <div id="Score"></div> 집계된 점수 -->
@@ -43,22 +44,21 @@
         let be3 = false;
         let be4 = false;
         let raf; // requestAnimationFrame 프레임의 go, stop을 통제하기 위한 변수.
-        let start = false; // 시작하면 true로 변환해 시작key 중복을 막기.
+        let start = false; // 시작키 중복을 막기위함.
+        
 
-        class Box {
-            constructor(index, x, y) {
-                // this.index = index; // box 고유번호 부여
-                this.x = x;
-                this.y = y;
-                this.draw();
-            }
-            draw() {
-                context.fillRect(this.x, this.y, 100, 20); // 넓이100, 두께20의 박스
-                
-                // context.fillStyle = '#fff';
-                // context.fillText(this.index, this.x+45, this.y+13);
-            }
-        } // class box
+        // 게임 시작을 알리는 패널
+        function startpanel() {
+            context.fillStyle = 'rgba(255,255,36)';
+            context.fillRect(0,250,canvas.width,200);
+            context.font = '50px Arial';
+            context.fillStyle = '#000000';
+            context.textAlign = "center";
+            context.fillText("Start Button", 200, 330);          
+            context.fillText("B", 200, 400); // 캔버스 넓이400 가운데 200px 기준으로 text center.
+            
+        } //startpanel
+        startpanel();
         
         function render() {
             context.clearRect(0, 0, canvas.width, canvas.height);
@@ -70,6 +70,7 @@
             // 점수를 캔버스 상단에 출력
             context.font = '20px Arial';
             context.fillStyle = '#00FF42';
+            context.textAlign = "left";
             context.fillText("Score: " + score, 0, 20);
             
             // line1
@@ -197,10 +198,9 @@
             }
             // 버튼을 눌렀을 때 각 리인에 각색이 켜지도록 true.            
             raf = requestAnimationFrame(render);
-            if (failcount > 5) {
+            if (failcount == 5) {
                 cancelAnimationFrame(raf);
-                start = false;
-                console.log(start);
+                endpanel();
             }
         } 
         // render()
@@ -230,6 +230,17 @@
             }
         } // update()
         
+        // 게임이 끝나고 점수를 보여주는 패널
+        function endpanel() {
+            context.fillStyle = 'rgba(0,0,0)';
+            context.fillRect(0,250,canvas.width,200);
+            context.font = '50px Arial';
+            context.fillStyle = '#00FF42';
+            context.textAlign= "center";
+            context.fillText("Score", 200, 330);
+            context.fillText(score, 200, 400);
+        }// endpanel
+
         // 소리효과
         let dow = new Audio('sound/do.mp3');
         let re = new Audio('sound/re.mp3');
@@ -285,8 +296,7 @@
             }
             // B 눌러서 render 실행
             if (e.keyCode == 66 && start == false) {
-                start = true;
-                console.log(start);
+                start = true; // 값을 바꿔 중복 실행 방지.
                 render()
                 setInterval(update, 800);
             }
@@ -379,6 +389,37 @@
             }
         }// mouseUp()
         
+
+        //touch
+        canvas.addEventListener("touchstart", handleStart,false);
+        canvas.addEventListener("touchmove", handleMove,false);
+        canvas.addEventListener("touchend", handleEnd,false);
+
+        function handleStart(evt) {
+            //console.log(evt);
+            evt.preventDefault();
+            if(drawMode === 'fill') {
+                context.fillRect();
+            } else {
+                context.beginPath();
+                paintingTrue();
+            }
+        }
+
+        function handleMove(evt) {
+            //console.log(evt);
+            evt.preventDefault();
+            var touches = evt.changedTouches;
+            context.lineTo(touches[0].screenX, touches[0].screenY);
+            context.stroke();
+        }
+
+        function handleEnd(evt) {
+            evt.preventDefault();            
+            context.closePath();
+            paintingFalse();
+        }
+
 
         /*
         function touchDown (e) {
