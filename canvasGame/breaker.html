@@ -6,20 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Breaker</title>
     <style>
-        .row {
-            padding: 0 35%;
-        }
-        canvas{
-            position: absolute;
+       canvas{
+            padding: 0;
+            margin: 0 auto;
+            display: block;
             background: #eee;
         }
     </style>
 </head>
 <body>
-    <div class="row">
+    
         <canvas class="canvas" width="400" height="770"></canvas>
         <script src="Box.js"></script>
-    </div>    
+    
     <script>
         const canvas = document.querySelector('.canvas');
         const context = canvas.getContext('2d');
@@ -36,6 +35,20 @@
         let be2 = false;
         let be3 = false;
         let be4 = false;
+        let start = false; // 시작키 중복을 막기위함.
+
+        // 게임 시작을 알리는 패널
+        function startpanel() {
+            context.fillStyle = 'rgba(255,255,36)';
+            context.fillRect(0,250,canvas.width,200);
+            context.font = '50px Arial';
+            context.fillStyle = '#000000';
+            context.textAlign = "center";
+            context.fillText("Start Button", 200, 330);          
+            context.fillText("B", 200, 400); // 캔버스 넓이400 가운데 200px 기준으로 text center.
+            
+        } //startpanel
+        startpanel();
 
         
         function render() {
@@ -47,6 +60,7 @@
             // 점수를 캔버스 상단에 출력
             context.font = '20px Arial';
             context.fillStyle = '#00FF42';
+            context.textAlign = "left";
             context.fillText("Score: " + score, 0, 20);
 
             // line1
@@ -246,6 +260,12 @@
             if (e.keyCode == 75) {
                 be4 = true;
             }
+            // B 눌러서 render 실행
+            if (e.keyCode == 66 && start == false) {
+                start = true; // 값을 바꿔 중복 실행 방지.
+                render()
+                setInterval(update, 800);
+            }
 
         } // keydown()
 
@@ -272,8 +292,6 @@
         
         document.addEventListener("keydown", onButton);
         document.addEventListener("keyup", keyUp);
-        setInterval(update, 800)
-        render();
         
 
     </script>
