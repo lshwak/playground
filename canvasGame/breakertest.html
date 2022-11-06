@@ -49,13 +49,14 @@
 
         // 게임 시작을 알리는 패널
         function startpanel() {
-            context.fillStyle = 'rgba(255,255,36)';
+            context.fillStyle = 'rgba(0,0,0)';
             context.fillRect(0,250,canvas.width,200);
             context.font = '50px Arial';
-            context.fillStyle = '#000000';
+            context.fillStyle = '#00FF42';
             context.textAlign = "center";
-            context.fillText("Start Button", 200, 330);          
-            context.fillText("B", 200, 400); // 캔버스 넓이400 가운데 200px 기준으로 text center.
+            context.fillText("Game Start", 200, 340);     
+            context.font = '35px Arial';     
+            context.fillText("Button B", 200, 390); // 캔버스 넓이400 가운데 200px 기준으로 text center.
             
         } //startpanel
         startpanel();
@@ -237,8 +238,9 @@
             context.font = '50px Arial';
             context.fillStyle = '#00FF42';
             context.textAlign= "center";
-            context.fillText("Score", 200, 330);
-            context.fillText(score, 200, 400);
+            context.fillText("Game Over", 200, 340);
+            context.font = '30px Arial';
+            context.fillText("Score : "+score, 200, 390);
         }// endpanel
 
         // 소리효과

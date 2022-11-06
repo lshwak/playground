@@ -22,30 +22,34 @@
     <script>
         const canvas = document.querySelector('.canvas');
         const context = canvas.getContext('2d');
-        const boxes1 = [];
-        const boxes2 = [];
-        const boxes3 = [];
-        const boxes4 = [];
+        const boxes1 = []; // keycode D가 통하는 첫번째 box라인
+        const boxes2 = []; // keycode F가 통하는 두번째 box라인
+        const boxes3 = []; // keycode J가 통하는 세번째 box라인
+        const boxes4 = []; // keycode K가 통하는 네번째 box라인
+        const speed = 3;
         let lock1 = true; // 기본값 true로 box가 내려올때 까지 keydown(e)막기위한 잠금변수
         let lock2 = true;
         let lock3 = true;
         let lock4 = true;
         let score = 0; // shift()의 발생에 따라 점수집계
+        let failcount = 0; // box가 keyevent를 거치지 않고 shift 될 때마다 카운트.
         let be1 = false; // button effect. key를 눌렀을때 나타나는 색효과
         let be2 = false;
         let be3 = false;
         let be4 = false;
+        let raf; // requestAnimationFrame 프레임의 go, stop을 통제하기 위한 변수.
         let start = false; // 시작키 중복을 막기위함.
 
         // 게임 시작을 알리는 패널
         function startpanel() {
-            context.fillStyle = 'rgba(255,255,36)';
+            context.fillStyle = 'rgba(0,0,0)';
             context.fillRect(0,250,canvas.width,200);
             context.font = '50px Arial';
-            context.fillStyle = '#000000';
+            context.fillStyle = '#00FF42';
             context.textAlign = "center";
-            context.fillText("Start Button", 200, 330);          
-            context.fillText("B", 200, 400); // 캔버스 넓이400 가운데 200px 기준으로 text center.
+            context.fillText("Game Start", 200, 340);     
+            context.font = '35px Arial';     
+            context.fillText("Button B", 200, 390); // 캔버스 넓이400 가운데 200px 기준으로 text center.
             
         } //startpanel
         startpanel();
@@ -67,10 +71,11 @@
             for (let i=0; i<boxes1.length; i++) {
                 context.fillStyle = 'rgba(255,187,0,0.8)';
                 box = boxes1[i];
-                box.y += 3; // 한 프레임당 7픽셀씩 y축(아래)으로 이동
+                box.y += speed; // 한 프레임당 7픽셀씩 y축(아래)으로 이동
                 if (box.y > 720) {
                     boxes1.shift();
                     score-=1; // box를 keyevent하지 못하고 아래로 지나가면 감점
+                    failcount++; // score가 떨어질때마다 실패한 횟수 세기.
                     context.fillStyle = 'rgba(255,0,0,0.1)';
                     context.fillRect(0,0,400,770); // 감점 될때 마다 배경 빨간충격효과
                 }
@@ -87,10 +92,11 @@
             for (let i=0; i<boxes2.length; i++) {
                 context.fillStyle = 'rgba(18,234,255,0.8)';
                 box = boxes2[i];
-                box.y += 3;
+                box.y += speed;
                 if (box.y > 720) {
                     boxes2.shift();
                     score-=1;
+                    failcount++; // score가 떨어질때마다 실패한 횟수 세기.
                     context.fillStyle = 'rgba(255,0,0,0.1)';
                     context.fillRect(0,0,400,770); // 감점 될때 마다 빨간효과
                 }
@@ -107,10 +113,11 @@
             for (let i=0; i<boxes3.length; i++) {
                 context.fillStyle = 'rgba(189,255,18,0.8)';
                 box = boxes3[i];
-                box.y += 3;
+                box.y += speed;
                 if (box.y > 720) {
                     boxes3.shift();
                     score-=1;
+                    failcount++; // score가 떨어질때마다 실패한 횟수 세기.
                     context.fillStyle = 'rgba(255,0,0,0.1)';
                     context.fillRect(0,0,400,770); // 감점 될때 마다 빨간효과
                 }
@@ -127,10 +134,11 @@
             for (let i=0; i<boxes4.length; i++) {
                 context.fillStyle = 'rgba(255,18,239,0.8)';
                 box = boxes4[i];
-                box.y += 3;
+                box.y += speed;
                 if (box.y > 720) {
                     boxes4.shift();
                     score-=1;
+                    failcount++; // score가 떨어질때마다 실패한 횟수 세기.
                     context.fillStyle = 'rgba(255,0,0,0.1)';
                     context.fillRect(0,0,400,770); // 감점 될때 마다 빨간효과
                 }
@@ -178,8 +186,11 @@
                 context.fillRect(300,0,100,700);
             }
             // 버튼을 눌렀을 때 각 리인에 각색이 켜지도록 true.
-
-            requestAnimationFrame(render);   
+            raf = requestAnimationFrame(render);
+            if (failcount == 5) {
+                cancelAnimationFrame(raf);
+                endpanel();
+            }
         } // render()
     
         let tempX1, tempY1, tempX2, tempY2, tempX3, tempY3, tempX4, tempY4;
@@ -206,6 +217,18 @@
                 boxes4.push(new Box(i, tempX4, tempY4));
             }
         } // update()
+
+        // 게임이 끝나고 점수를 보여주는 패널
+        function endpanel() {
+            context.fillStyle = 'rgba(0,0,0)';
+            context.fillRect(0,250,canvas.width,200);
+            context.font = '50px Arial';
+            context.fillStyle = '#00FF42';
+            context.textAlign= "center";
+            context.fillText("Game Over", 200, 340);
+            context.font = '30px Arial';
+            context.fillText("Score : "+score, 200, 390);
+        }// endpanel
 
         // 소리효과
         let dow = new Audio('sound/do.mp3');
