@@ -32,7 +32,7 @@
         const boxes2 = []; // keycode F가 통하는 두번째 box라인
         const boxes3 = []; // keycode J가 통하는 세번째 box라인
         const boxes4 = []; // keycode K가 통하는 네번째 box라인
-        const speed = 3;
+        const speed = 3; // 기본값 3픽셀씩 이동. 크롬 기준.
         let lock1 = true; // 기본값 true로 box가 내려올때 까지 keydown(e)막기위한 잠금변수
         let lock2 = true;
         let lock3 = true;
@@ -243,7 +243,7 @@
             context.fillText("Score : "+score, 200, 390);
         }// endpanel
 
-        // 소리효과
+        // 소리효과 도레미파
         let dow = new Audio('sound/do.mp3');
         let re = new Audio('sound/re.mp3');
         let mi = new Audio('sound/mi.mp3');
