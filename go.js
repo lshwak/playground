@@ -1,13 +1,21 @@
-const person = {                        
-    name : "zunik",
-    age : 30,
-    say : function() {
-        console.log(`hello my name is ${this.name} age is ${person["age"]}`);
-    }
-};
+const arr = [
+    {color: "red"},
+    {color: "blue"},
+    {color: "green"},
+    {color: "black"},
+    {color: "red"}
+]
 
-person.say();
+const element = arr.find((elm) => {
+    return elm.color === "red";
+});
+console.log(element);
 
-console.log(`name : ${"name" in person }`);
-console.log(`age : ${"age" in person }`);
-console.log(`gender : ${"gender" in person }`);
+
+// let number = 3;
+// console.log(arr.findIndex((elm) => elm.color === "green"));
+// console.log(
+//     arr.findIndex((elm) => {
+//         return elm.color === "red";
+//     })
+// );
