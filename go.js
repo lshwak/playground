@@ -1,21 +1,12 @@
-const arr = [
-    {color: "red"},
-    {color: "blue"},
-    {color: "green"},
-    {color: "black"},
-    {color: "red"}
+const arr1 = [
+    {num: 1, color: "red"},
+    {num: 2, color: "blue"},
+    {num: 3, color: "green"}
 ]
 
-const element = arr.find((elm) => {
-    return elm.color === "red";
-});
-console.log(element);
+const arr2 = [
+    {num: 4, color: "black"},
+    {num: 5, color: "blue"}
+]
 
-
-// let number = 3;
-// console.log(arr.findIndex((elm) => elm.color === "green"));
-// console.log(
-//     arr.findIndex((elm) => {
-//         return elm.color === "red";
-//     })
-// );
+console.log(arr1.concat(arr2));
