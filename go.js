@@ -1,12 +1,13 @@
-const arr1 = [
-    {num: 1, color: "red"},
-    {num: 2, color: "blue"},
-    {num: 3, color: "green"}
-]
+let score = 70;
 
-const arr2 = [
-    {num: 4, color: "black"},
-    {num: 5, color: "blue"}
-]
+score >= 90 ? console.log("A+") : score >=50 ? console.log("B") : console.log("F");
 
-console.log(arr1.concat(arr2));
+if (score >= 90) {
+    console.log("A+");
+} else if (score >= 50) {
+    console.log("B");
+} else {
+    console.log("F");
+}
+
+//중첩삼항연산자는 가독성이 떨어질 수 있다. 삼항 연산자와 조건식의 가독성 차이를 염두해두며 사용할 것.
