@@ -1,28 +1,45 @@
-function taskA(a, b, cb) {                      
+function isPositive(number, resolve, reject) {
     setTimeout(()=>{
-        const res = a + b;                     
-        cb(res);
-    },3000)                                     
-}
-function taskB(a, cb) {
-    setTimeout(()=> {
-        const res = a * 2;
-        cb(res);
-    }, 1000);
-}
-function taskC(a, cb) {
-    setTimeout(()=> {
-        const res = a * -1;
-        cb(res);
+        if(typeof number === "number") {
+            resolve(number >= 0 ? "양수" : "음수");
+        } else {
+            reject("NO number");
+        }
     },2000);
 }
-taskA(4, 5, (a_res) => {                          
-    console.log("A RESULT : ", a_res);
-    taskB(a_res, (b_res)=> {
-        console.log("B RESULT : ", b_res);
-        taskC(b_res, (c_res)=> {
-            console.log("C RESULT : ", c_res);
-        })
+
+function isPositiveP(number) {
+    const executor = (resolve, reject) => {                         //실행자
+        setTimeout(()=>{
+            if(typeof number === "number") {                        //성공 -> resolve
+                console.log(number);
+                resolve(number >= 0 ? "양수" : "음수");
+            } else {                                                //실패 -> reject
+                reject("NO number..");
+            }
+        },2000);
+    };
+    const asyncTask = new Promise(executor);
+    return asyncTask;
+}
+const res = isPositiveP(101);
+res
+    .then((res) => {
+        console.log("작업 성공 : ",res);
     })
-});
-console.log("작업 수행 끝");
+    .catch((err) => {
+        console.log("작업 실패 : ", err);
+    });
+
+
+
+// isPositive(
+//     10,
+//     (res) => {
+//         console.log("성공! : ", res);
+//     },
+//     (err) => {
+//         console.log("실패.. : ", err);
+//     }
+// );
+
