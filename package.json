@@ -3,6 +3,7 @@
     "create-react-app": "^4.0.3",
     "jshint": "^2.12.0",
     "mysql": "^2.18.1",
-    "mysql2": "^2.2.5"
+    "mysql2": "^2.2.5",
+    "node-fetch": "^2.6.9"
   }
 }
