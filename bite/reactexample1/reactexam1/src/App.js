@@ -1,5 +1,4 @@
 import React from "react";
-//  import './App.css';
 import MyHeader from "./myHeader";
 import Counter from "./Counter";
 import Container from "./Container";
