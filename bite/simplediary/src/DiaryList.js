@@ -1,7 +1,6 @@
 import DiaryItem from "./DiayItem";
 
-const DiaryList = ({diaryList}) => {
-    console.log(diaryList);
+const DiaryList = ({diaryList}) => {    
     return (
         <div className="DiaryList">
             <h2>일기 리스트</h2>
