@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 const DiaryItem = ({onEdit, onRemove, author, content, created_date, emotion, id}) => {
 
     const [isEdit, setIsEdit] = useState(false);
-    const toggleEdit = () => setIsEdit(!isEdit);
+    const toggleEdit = () => setIsEdit(!isEdit);    // 본문 수정 토글
 
     const [localContent,setLocalContent] = useState(content);
     const localContentInput = useRef();
@@ -12,14 +12,13 @@ const DiaryItem = ({onEdit, onRemove, author, content, created_date, emotion, id
         if(window.confirm(`${id}번째 일기를 삭제하시겠습니까?`)) {
             onRemove(id);
         }
-    };
+    };  // 일기 데이터 삭제
 
     const handleQuitEdit = () => {
         setIsEdit(false);
         setLocalContent(content);
-    };
-
-    // 수정완료를 눌렀을때 이벤트를 처리할 함수
+    };  // 수정 취소 시 초기화
+    
     const handleEdit = () => {
         if (localContent.length < 5) {
             localContentInput.current.focus();
@@ -29,7 +28,7 @@ const DiaryItem = ({onEdit, onRemove, author, content, created_date, emotion, id
             onEdit(id,localContent);
             toggleEdit();
         }  
-    };
+    };  // 수정완료를 눌렀을때 이벤트를 처리할 함수
     
     return (
         <div className="DiaryItem">
@@ -44,7 +43,7 @@ const DiaryItem = ({onEdit, onRemove, author, content, created_date, emotion, id
                 {isEdit ? (
                     <>
                         <textarea
-                        ref={localContentInput}
+                            ref={localContentInput}
                             value = {localContent}
                             onChange={(e) => setLocalContent(e.target.value)}
                         />

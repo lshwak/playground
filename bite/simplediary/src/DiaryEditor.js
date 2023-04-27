@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 
 const DiaryEditor = ({onCreate}) => {
 
-  const authorInput = useRef();
+  const authorInput = useRef();   // input 조건 focus
   const contentInput = useRef();
   
   const[state, setState] = useState({
@@ -16,7 +16,7 @@ const DiaryEditor = ({onCreate}) => {
       ...state,
       [e.target.name] : e.target.value
     })
-  };
+  };  // 수정
 
   const handleSubmit = () => {
     if(state.author.length < 1) {
@@ -26,7 +26,7 @@ const DiaryEditor = ({onCreate}) => {
     if(state.content.length < 5) {
       contentInput.current.focus();
       return;
-    }
+    };  // 저장 조건 focus
 
     onCreate(state.author, state.content, state.emotion);
     alert("저장 성공");
@@ -34,7 +34,7 @@ const DiaryEditor = ({onCreate}) => {
       author: "",
       content: "",
       emotion: 1
-    });
+    }); // 추가
   };
 
   return  (

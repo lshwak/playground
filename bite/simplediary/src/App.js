@@ -19,13 +19,13 @@ function App() {
     };
     dataId.current += 1;
     setData([newItem, ...data]);
-  };
+  };  // 새로운 일기 추가 onCreate
 
   const onRemove = (targetId) => {
     console.log(`${targetId}가 삭제되었습니다.`);
     const newDiaryList = data.filter((it)=>it.id !== targetId);
     setData(newDiaryList);
-  };
+  };  // 일기 삭제
 
   const onEdit = (targetId, newContent) => {
     setData(
@@ -33,7 +33,7 @@ function App() {
         it.id === targetId ? { ...it, content : newContent } : it
       )
     );
-  };
+  };  // 일기 수정.
 
   return (
     <div className="App">
