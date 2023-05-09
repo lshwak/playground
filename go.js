@@ -1,8 +1,11 @@
-a = 7;
-b = 3;
-c = a / b ;
-console.log(c);
+let a = 10;
+let b = 4;
+let answer = 0;
 
-d = ~~((a / b)*1000);
-d = Math.floor((a / b)*1000);
-console.log(d);
+for (i=1; i <= a; i++) {
+    // if (i % 2 == 0){
+    //     answer += i;
+    // }
+    i % 2 == 0 ? answer += i :  answer+=0 ;
+}
+console.log(answer);
