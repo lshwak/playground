@@ -1,17 +1,24 @@
-const a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const b = [89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99];
 
-answer = 0;
-bnswer = 0;
+const a = 12000;
+const b = 2000;
 
-// for (i=0; i <= 10; i++) {
-//     answer += i;
-// }
+const n1 = 10;
+const k1 = 3;
+const n2= 64;
+const k2= 6;
 
-a.map((a) => answer+=a);
-b.map(b => bnswer+=b);
-answer = answer/a.length;
-bnswer = bnswer/b.length;
+let answer = 0;
 
-console.log(answer.toFixed(1));
-console.log(bnswer.toFixed(1));
+let temp = a * n1;
+
+console.log(answer);
+
+ 
+
+
+
+
+
+
+
+
