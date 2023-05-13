@@ -1,6 +1,10 @@
-import { useRef, useState } from "react";
+import React,{ useEffect, useRef, useState } from "react";
 
 const DiaryEditor = ({onCreate}) => {
+
+  useEffect(() => {
+    console.log("DiaryEditor render!!");
+  });
 
   const authorInput = useRef();   // input 조건 focus
   const contentInput = useRef();
@@ -76,4 +80,4 @@ const DiaryEditor = ({onCreate}) => {
     </div>
   );
 };
-export default DiaryEditor;
+export default React.memo(DiaryEditor);
