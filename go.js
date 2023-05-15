@@ -45,3 +45,10 @@ console.log(d+(c-(count2*drink)));
 
 
 
+
+let k = 10;
+let n = 3;
+    k-=~~(n/10);
+    if (k < 0) k= 0;
+answer = n*12000+k*2000;
+console.log("다른사람 풀이 : "+answer);
