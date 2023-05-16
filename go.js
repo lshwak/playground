@@ -52,3 +52,10 @@ let n = 3;
     if (k < 0) k= 0;
 answer = n*12000+k*2000;
 console.log("다른사람 풀이 : "+answer);
+
+let time1 = new Date();
+let time2 = new Date().getTime();
+let time3 = new Date().toLocaleDateString();
+console.log(time1);
+console.log(time2);
+console.log(time3);
