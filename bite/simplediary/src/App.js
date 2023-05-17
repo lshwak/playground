@@ -39,18 +39,17 @@ function App() {
     setData((data)=>[newItem, ...data]);
   },[]);  // 새로운 일기 추가 onCreate
 
-  const onRemove = (targetId) => {
-    const newDiaryList = data.filter((it)=>it.id !== targetId);
-    setData(newDiaryList);
-  };  // 일기 삭제
+  const onRemove = useCallback((targetId) => {
+    setData(data => data.filter((it)=>it.id !== targetId));
+  },[]);  // 일기 삭제
 
-  const onEdit = (targetId, newContent) => {
-    setData(
+  const onEdit = useCallback((targetId, newContent) => {
+    setData((data) => 
       data.map((it) => 
         it.id === targetId ? { ...it, content : newContent } : it
       )
     );
-  };  // 일기 수정
+  },[]);  // 일기 수정
 
   const getDiaryAnalysis = useMemo(() => {
     const goodCount = data.filter((it)=>it.emotion >= 3).length;
