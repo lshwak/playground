@@ -16,8 +16,8 @@ let answer = '';
 
 
 for (i=0; i<s.length; i++) {
-    
     tem = s[i].charCodeAt();
+
     if((65 <= tem && tem <= 89) || (97 <= tem && tem <= 121)) {
         temp = tem + n;
     } else if ((tem == 90)||(tem  == 122)) {
@@ -26,11 +26,14 @@ for (i=0; i<s.length; i++) {
         temp = tem;
     }
     answer += String.fromCharCode(temp);
+    
 }
 
 console.log(answer);
 
- 
+
+
+
 
 
 
