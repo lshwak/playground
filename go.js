@@ -3,7 +3,6 @@
 
 
 //65 ~ 90 & 97 ~ 122
-//console.log(s[i]);
 // tem = ((65 <= tem && tem <= 90) || (97 <= tem && tem <= 122)) ? 
 // temp = tem + n : temp = tem;
 
@@ -13,7 +12,6 @@ let n = 4;
 let temp = 0;
 let tem = 0;
 let answer = '';
-
 
 for (i=0; i<s.length; i++) {
     tem = s[i].charCodeAt();
