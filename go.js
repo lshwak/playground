@@ -9,56 +9,33 @@
 
 let s = "a B z";
 let n = 4;
-let temp1 = 0;
-let temp2 = 0;
+let temp = 0;
 let tem = 0;
-let up = 0;
-let low = 0;
 let answer = '';
 
-for (i=0; i<s.length; i++) {
-    up = s[i].charCodeAt();
-    low = s[i].charCodeAt();
-
-    if(65 <= up && up <= 89) {
-        temp1 = up + n;
-    } else if (up == 90) {
-        temp1 = up - 26 + n;
-    } else if(up == 32) {
-        temp1 = up;
+    for (i=0; i<s.length; i++) {
+        tem = s[i].charCodeAt();
+        if(65 <= tem && tem <= 90) {
+            temp = tem + n;
+            if (temp > 90) {
+                temp -= 26;
+            }
+        } else if (97 <= tem && tem <= 122) {
+            temp = tem + n;
+            if (temp > 122) {
+                temp -= 26;
+            }
+        } else {
+            temp = tem;
+        }
+        answer += String.fromCharCode(temp);
     }
-
-    if(97 <= low && low <= 121) {
-        temp2 = low + n;
-    } else if (low  == 122) {
-        temp2 = low - 26 + n;
-    }
-
-
-
-
-
-    answer += String.fromCharCode();
     
-}
-console.log(temp1);
-console.log(temp2);
-
 
 console.log(answer);
 
 
 
-// tem = s[i].charCodeAt();
-
-// if((65 <= tem && tem <= 89) || (97 <= tem && tem <= 121)) {
-//     temp = tem + n;
-// } else if ((tem == 90)||(tem  == 122)) {
-//     temp = tem - 26 + n;
-// } else if(tem == 32) {
-//     temp = tem;
-// }
-// answer += String.fromCharCode(temp);
 
 
 
