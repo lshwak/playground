@@ -1,30 +1,25 @@
-// https://school.programmers.co.kr/learn/courses/30/lessons/12926 프로그래머스 시저암호 
+let age = 25;           // 정수
+let tall = 175.9;       // 실수
 
-//65 ~ 90 & 97 ~ 122
+let inf = Infinity;         // 무한대
+let minusInf = -Infinity;   // 음의 무한데
+let nan = NaN;              // 실패의 결과값
 
-let s = "a B z";
-let n = 4;
-let temp = 0;
-let tem = 0;
-let answer = '';
+let name = "zunik";         // 쌍따옴표
+let bboy = 'bboy';          // 작은 따옴표
+let street = `hiphop ${bboy} ${name}`;      // 백틱 (변수의 값을 추가가능/ 템플릿 리터럴)
 
-    for (i=0; i<s.length; i++) {
-        tem = s[i].charCodeAt();
-        if(65 <= tem && tem <= 90) {
-            temp = tem + n;
-            if (temp > 90) {
-                temp -= 26;
-            }
-        } else if (97 <= tem && tem <= 122) {
-            temp = tem + n;
-            if (temp > 122) {
-                temp -= 26;
-            }
-        } else {
-            temp = tem;
-        }
-        answer += String.fromCharCode(temp);
-    }
-    
-console.log(answer);
+let isSwitchOff = false;
 
+let a = null;
+
+let A = 12;
+let B = "2";
+
+console.log( age + tall);
+console.log( age * tall);
+console.log(street);
+console.log(a);
+console.log(A * B);             // 묵시적 형변환, 캐스팅.
+console.log(A + B);
+console.log(A + parseInt(B));   // parseInt로 명시적 형변환.
