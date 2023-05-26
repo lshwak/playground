@@ -1,19 +1,12 @@
-let zunik = {
-    name: "zunik",
-    age: 31,
-    job: "developer",
-    secondJob : "bboy"
-}
 
-for(let [key,value] of Object.entries(zunik)) {
-    console.log(`${key}:${value}`);
-}
-
-let user = new Map ();
-user.set ("name", "zunik");
-user.set ("age", "30");
-user.set ("from", "ulsan");
-
-for (let [key,value] of user) {
-    console.log(`${key}:${value}`)
+function solution(my_string, letter) {
+    var answer = '';
+    //let a = '';
+    for (i=0; i < my_string.length; i++) {
+        if (my_string[i] != letter) {
+            answer += my_string[i];
+        }
+    }
+    //answer = my_string.split(letter).join(a);
+    return answer;
 }
