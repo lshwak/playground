@@ -1,4 +1,3 @@
-// a, e, i, o, u 
 const my_string = "nice to meet you";
 
     let answer1 = '';
