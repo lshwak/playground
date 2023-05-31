@@ -1,13 +1,20 @@
-let hp = 24;
-let answer = 0;
-    while (hp > 0) {
-        if (hp >= 5) {
-            hp -= 5;
-        } else if (hp >= 3) {
-            hp -= 3;
-        } else {
-            hp -= 1;
+babbling = ["ayaye", "uuuma", "ye", "yemawoo", "ayaa"];
+
+var answer = 0;
+let  str = ["aya","ye","woo","ma"];
+    
+    for (i=0; i<babbling.length; i++) {
+        let a = babbling[i]
+        for (j=0; j<str.length; j++) {
+            if (babbling[i].includes(str[j])) {
+                if (a.includes(str[j])) {
+                    a = a.replace(str[j],'');
+                }
+            }
+        }   
+        if (a == '') {
+            answer++
         }
-        answer++;
     }
-console.log(answer)
+
+    console.log(answer);
