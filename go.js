@@ -4,7 +4,7 @@ var answer = 0;
 let  str = ["aya","ye","woo","ma"];
     
     for (i=0; i<babbling.length; i++) {
-        let a = babbling[i]
+        let a = babbling[i]                 // 변수에 담아 필터링
         for (j=0; j<str.length; j++) {
             if (babbling[i].includes(str[j])) {
                 if (a.includes(str[j])) {
