@@ -1,19 +1,24 @@
-// 직사각형 넚이 구하기
-const dots = [[1, 1], [5, 1], [5, 5], [1, 5]];
+// 1, 2, 3, 4 == 5,4
+// 9, 2, 1, 3 == 29,6
 
-    let x = [];
-    let y = [];
-    let xb = 0;
-    let xs = 0;
-    let yb = 0;
-    let ys = 0;
-    for (i=0; i<dots.length; i++) {
-        x.push(dots[i][0]);         // x 좌표만 배열로 추가
-        y.push(dots[i][1]);         // y 좌표만 배열로 추가
-    }
-    xb = Math.max.apply(null,x)     // x 최대값
-    xs = Math.min.apply(null,x)     // x 최소값
-    yb = Math.max.apply(null,y)     // y 최대값
-    ys = Math.min.apply(null,y)     // y 최소값
-    
-    console.log(((xb - xs) * (yb - ys))) // x길이 * y길이 == 넓이
+let n1 = 1;
+let n2 = 3;
+let d1 = 2;
+let d2 = 4;
+
+let n = 0;
+let d = 0;
+
+let answer = [];
+
+d = d1 * d2;
+n = (d2 * n1) + (d1 * n2)
+
+while ((n%2 == 0) && (d%2 == 0)) {
+    n /= 2;
+    d /= 2;
+}
+
+answer.push(n,d);
+
+console.log(answer);
