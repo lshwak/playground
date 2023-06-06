@@ -5,10 +5,8 @@ let n1 = 1;
 let n2 = 3;
 let d1 = 2;
 let d2 = 4;
-
 let n = 0;
 let d = 0;
-
 let answer = [];
 
 d = d1 * d2;
@@ -20,5 +18,4 @@ while ((n%2 == 0) && (d%2 == 0)) {
 }
 
 answer.push(n,d);
-
 console.log(answer);
