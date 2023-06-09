@@ -1,21 +1,24 @@
-// 1, 2, 3, 4 == 5,4
-// 9, 2, 1, 3 == 29,6
 
-let n1 = 1;
-let n2 = 3;
-let d1 = 2;
-let d2 = 4;
-let n = 0;
-let d = 0;
-let answer = [];
+    const my_string = "hello";
+    const n = 3;
+    let answer = '';
+    for (let i=0; i<my_string.length; i++) {
+        for (let j=0; j<n; j++) {
+            answer += my_string[i];
+        }
+    }
+    console.log(answer);
 
-d = d1 * d2;
-n = (d2 * n1) + (d1 * n2)
+    const mystr = "whatup";
+    const m = 5;
+    let ans = '';
 
-while ((n%2 == 0) && (d%2 == 0)) {
-    n /= 2;
-    d /= 2;
-}
-
-answer.push(n,d);
-console.log(answer);
+    let arr = Array.from(mystr);
+    let str = [];
+    for(i=0; i<arr.length; i++) {
+        for (j=1; j<=m; j++) {
+            str.push(arr[i])    
+        }
+    }
+    ans = str.toString().replace(/,/g,"");
+    console.log(ans);
