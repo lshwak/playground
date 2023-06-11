@@ -1,8 +1,6 @@
 import "./App.css";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
-import RouteTest from "./components/RoutesTest";
-
 import Home from "./pages/Home";
 import New from "./pages/New";
 import Edit from "./pages/Edit";
@@ -10,6 +8,7 @@ import Diary from "./pages/Diary";
 
 
 function App() {
+
   return (
     <BrowserRouter>
     <div className="App">
@@ -20,7 +19,6 @@ function App() {
         <Route path="/edit" element={<Edit />} />
         <Route path="/diary/:id" element={<Diary />} />
       </Routes>
-      <RouteTest />
     </div>
     </BrowserRouter>
   );

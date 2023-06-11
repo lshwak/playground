@@ -1,3 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Yeon+Sung&display=swap');
+
+body {
+  background-color: #f6f6f6; /* 옅은 회색 배경 */
+  display : flex;
+  justify-content: center; /* body태그 기준으로 가운데 */
+  align-items: center;    /* display가 flex속성일때 세로축 기준으로 가운데 */
+  font-family: 'Nanum Pen Script'; /* default font로 사용 */
+  min-height: 100vh;    /* (vh == vertical hight) 현재 엡 스크린에 실제 크기의 100%를 최소 높이로 가짐 */
+  margin: 0; /* 기본 마진 없애기 */
+}
+
+@media (min-width : 650px) { /* 화면이 650px이상으로 넓을 때 */
+  .App {
+    width: 640px;
+  }
+}
+
+@media (max-width : 650px) { /* 화면이 650px이하 일 때 */
+  .App {
+    width: 90vw;  /* 90% 차지 */
+  }
+}
+
+#root {
+  background-color: white;
+  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+}
+
 .App {
-  padding: 20px;
+  min-height: 100vh; /* 기본적으로 화면에 100%를 차지하는 높이 */
+  padding-left: 20px;
+  padding-right: 20px;
 }
