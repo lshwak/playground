@@ -33,7 +33,7 @@ function App() {
       />
       <MyButton 
         text={"버튼"}
-        onClick={() => alert("버튼클릭")}
+        onClick={() => alert("버튼클릭")} // default
       />
       <Routes>
         <Route path="/" element={<Home />} />
