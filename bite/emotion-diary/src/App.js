@@ -39,6 +39,7 @@ function App() {
   const [data,dispatch] = useReducer(reducer,[]);
 
   const dataId = useRef(0);
+
    // CREATE
   const onCreate = (date,content,emotion)=> {
     dispatch({type : "CREATE",
@@ -51,10 +52,12 @@ function App() {
     });
     dataId.current += 1;
   };
+
    // REMOVE
   const onRemove = (targetId) => {
     dispatch({type:"REMOVE",targetId});
   };
+  
    // EDIT
   const onEdit = (targetId,date,content,emotion)=>{
     dispatch({
