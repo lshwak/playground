@@ -10,6 +10,7 @@
     }
     console.log(answer);
 
+    // 굳이 배열로 형변환하고 push할 필요가 없었던 코드
     const mystr = "whatup";
     const m = 5;
     let ans = '';
