@@ -16,7 +16,7 @@ const ControlMenu = ({value, onChange, optionList}) => {
     );
 };
 
-const sortTypeOption = [
+const sortOptionList = [
     {value:"latest",name:"최신순"},
     {value:"oldest",name:"오래된순"}
 ]
@@ -60,7 +60,7 @@ const DiaryList = ({diaryList}) => {
 
             <div className="menu_wrapper">
                 <div className="left_col">
-                <ControlMenu value={sortType} onChange={setSortType} optionList={sortTypeOption} />
+                <ControlMenu value={sortType} onChange={setSortType} optionList={sortOptionList} />
                 <ControlMenu
                     value={filter}
                     onChange={setFilter}
