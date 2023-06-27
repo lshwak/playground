@@ -1,4 +1,3 @@
-
     const my_string = "hello";
     const n = 3;
     let answer = '';
