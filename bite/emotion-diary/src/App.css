@@ -238,6 +238,11 @@ header button {
   padding: 20px;
 }
 
+.DiaryEditor .control_box {
+  display: flex;
+  justify-content: space-between;     /* 취소, 작성완료 버튼 양쪽으로 간격 */
+  align-items: center;              /* 세로 축에서 중앙으로 */
+}
 
 /* EmotionItem */
 .EmotionItem {
