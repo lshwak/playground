@@ -35,7 +35,7 @@ const emotionList = [
 ];
 
 const getStringDate = (date) => {
-    return date.toISOString().slice(0,10)
+    return date.toISOString().slice(0,10);
 };
 
 const DiaryEditor = ({isEdit, originData}) => {
@@ -75,7 +75,7 @@ const DiaryEditor = ({isEdit, originData}) => {
             setEmotion(originData.emotion);
             setContent(originData.content);
         }
-    }, [isEdit, originData])
+    }, [isEdit, originData]);
 
     
     return (
