@@ -77,7 +77,6 @@ const DiaryEditor = ({isEdit, originData}) => {
         }
     }, [isEdit, originData]);
 
-    
     return (
         <div className='DiaryEditor'>
             <MyHeader 
