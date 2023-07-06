@@ -43,6 +43,7 @@ const DiaryList = ({diaryList}) => {
         }
 
         const compare = (a,b) => {
+            console.log(sortType)
             if (sortType === 'latest') {
                 return parseInt(b.date) - parseInt(a.date);
             } else {
@@ -52,6 +53,7 @@ const DiaryList = ({diaryList}) => {
         const copyList = JSON.parse(JSON.stringify(diaryList));
         const filteredList = filter === "all" ? copyList : copyList.filter((it)=>filterCallBack(it));
         const sortedList = filteredList.sort(compare);
+        console.log("sortedList~~~~~",sortedList)
         return sortedList;
     };
 
