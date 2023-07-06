@@ -68,7 +68,6 @@ const dummyData = [
   },
 ]
 
-
 function App() {
   const [data,dispatch] = useReducer(reducer,dummyData);
 
