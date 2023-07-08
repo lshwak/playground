@@ -23,9 +23,7 @@ const reducer = (state,action) => {
       break;
     }
     case 'EDIT':{
-      console.log("뉴 스테이트 전이다 개새야",state)
       newState = state.map((it)=>it.id === action.data.id? {...action.data}: it);
-      console.log("뉴 스테이트다 시발아",newState)
       break;
     }
     default:

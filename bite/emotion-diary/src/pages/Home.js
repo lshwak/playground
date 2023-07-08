@@ -12,7 +12,6 @@ const Home = () => {
     const headText = `${curDate.getFullYear()}년 ${curDate.getMonth() + 1}월`;
 
     useEffect (()=> {
-        console.log("훗 여기가 다이어리리스트임 ㅉㅉ",diaryList)
         if (diaryList.length >= 1) {
 
         
