@@ -8,7 +8,6 @@ import { emotionList } from "../utill/emotion";
 import MyHeader from "../components/MyHeader";
 import MyButton from "../components/MyButton";
 
-
 const Diary = () => {
 
     const {id} = useParams();
