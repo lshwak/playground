@@ -7,5 +7,4 @@ answer.push(h,idx)
 
 console.log(h)
 console.log(idx)
-
 console.log(answer)
