@@ -71,7 +71,10 @@ const dummyData = [
 function App() {
 
   useEffect(()=> {
-    localStorage.setItem('key', 10);
+    const item1 = parseInt(localStorage.getItem('item1'));
+    const item2 = localStorage.getItem('item2');
+    const item3 = JSON.parse(localStorage.getItem('item3'));
+    console.log({ item1, item2, item3 });
   },[]);
 
   const [data,dispatch] = useReducer(reducer,dummyData);
