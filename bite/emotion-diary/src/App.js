@@ -37,7 +37,6 @@ const reducer = (state,action) => {
 export const DiaryStateContext = React.createContext();
 export const DiaryDispatchContext = React.createContext();
 
-
 function App() {
   const [data,dispatch] = useReducer(reducer,[]);
 
