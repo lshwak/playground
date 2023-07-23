@@ -5,10 +5,6 @@ let answer = '';
 
 let arr = [...my_string];
 
-// let temp = arr[num1];
-// arr[num1] = arr[num2];
-// arr[num2] = temp;
-
 [arr[num1], arr[num2]] = [arr[num2], arr[num1]];
 
 answer = arr.join("");
