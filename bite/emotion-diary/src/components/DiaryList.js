@@ -1,10 +1,10 @@
-import {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 
 import MyButton from "./MyButton";
 import DiaryItem from "./DiaryItem";
 
-const ControlMenu = ({value, onChange, optionList}) => {
+const ControlMenu = React.memo(({value, onChange, optionList}) => {
     return (
         <select className="ControlMenu" value={value} onChange={(e)=>onChange(e.target.value)}>
             {optionList.map((it,idx)=> (
@@ -14,7 +14,7 @@ const ControlMenu = ({value, onChange, optionList}) => {
             ))}
         </select>
     );
-};
+});
 
 const sortOptionList = [
     {value:"latest",name:"최신순"},
@@ -43,7 +43,6 @@ const DiaryList = ({diaryList}) => {
         }
 
         const compare = (a,b) => {
-            console.log(sortType)
             if (sortType === 'latest') {
                 return parseInt(b.date) - parseInt(a.date);
             } else {
