@@ -6,6 +6,7 @@ let answer = '';
 let arr = [...my_string];
 
 [arr[num1], arr[num2]] = [arr[num2], arr[num1]];
+
 answer = arr.join("");
 
 console.log(answer);
