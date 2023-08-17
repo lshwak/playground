@@ -1,6 +1,5 @@
 const num1 = 3;
 const num2 = 6;
-
 const my_string = 'i love you';
 
 let answer = '';
