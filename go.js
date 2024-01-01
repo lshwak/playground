@@ -11,3 +11,4 @@ let arr = [...my_string];
 answer = arr.join("");
 
 console.log(answer);
+// Happy New Year
