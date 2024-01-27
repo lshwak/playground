@@ -1,0 +1,44 @@
+table {
+  border: 1px solid;
+  border-collapse: collapse;
+  border-style: hidden;
+}
+
+tr {
+
+}
+
+td {
+  border: 1px solid;
+  border-color: rgb(155,155,155);
+  padding: 10px 13px;
+}
+
+.ans {
+  font-size: 30px;
+  text-align: right;
+  background-color: rgb(86, 86, 86);
+  padding: 1px 5px;
+  font-weight: lighter;
+}
+
+.white {
+  color: #fff; 
+}
+
+.cal {
+  background-color: rgb(233, 160, 87);
+}
+
+.num {
+  background-color: rgb(228, 228, 228);
+  text-align: center;
+}
+
+.zero {
+  background-color: rgb(228, 228, 228);
+}
+
+.topCal {
+  background-color: rgb(219, 219, 219);
+}
