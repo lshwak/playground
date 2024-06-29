@@ -1,4 +1,173 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리듬 게임</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000;
+            position: relative;
+        }
+        canvas {
+            background-color: #fff;
+            border: 1px solid #000;
+        }
+        .score {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 24px;
+        }
+        .start-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ff69b4;
+            font-size: 24px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="score">Score: 0</div>
+    <div class="start-message">Press Space to Start</div>
+    <canvas id="gameCanvas" width="360" height="640"></canvas>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreDisplay = document.querySelector('.score');
+        const startMessage = document.querySelector('.start-message');
+
+        const canvasWidth = canvas.width;
+        const canvasHeight = canvas.height;
+        const numCols = 4;
+        const colWidth = canvasWidth / numCols;
+        const brickHeight = 40;
+        let brickSpeed = 2;
+        const initialBrickSpeed = brickSpeed; // 초기 벽돌 속도
+        const hitLineY = canvasHeight - 50; // 기준선 위치
+        let bricks = [];
+        let score = 0;
+        let gameRunning = false;
+
+        const colors = ['#ff99c8', '#fcf6bd', '#d0f4de', '#a9def9'];
+
+        document.addEventListener('keydown', startGame);
+        document.addEventListener('keydown', handleKeyPress);
+
+        function startGame(event) {
+            if (event.code === 'Space' && !gameRunning) {
+                gameRunning = true;
+                startMessage.style.display = 'none';
+                gameLoop();
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (!gameRunning) return;
+            let colIndex = -1;
+            switch (event.code) {
+                case 'KeyD': colIndex = 0; break;
+                case 'KeyF': colIndex = 1; break;
+                case 'KeyJ': colIndex = 2; break;
+                case 'KeyK': colIndex = 3; break;
+            }
+            if (colIndex !== -1) {
+                for (let i = 0; i < bricks.length; i++) {
+                    if (bricks[i].col === colIndex && bricks[i].y + brickHeight >= hitLineY) {
+                        bricks.splice(i, 1);
+                        score += 1;
+                        updateScore();
+                        break;
+                    }
+                }
+            }
+        }
+
+        function updateScore() {
+            scoreDisplay.textContent = `Score: ${score}`;
+            if (score % 10 === 0 && score !== 0) {
+                brickSpeed += 0.1; // 각 점수 증가마다 속도를 조금씩 증가
+                console.log(`Speed increased: ${brickSpeed}`);
+            }
+        }
+
+        function gameLoop() {
+            if (!gameRunning) return;
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            drawHitLine();
+            drawBricks();
+            updateBricks();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function drawHitLine() {
+            ctx.strokeStyle = '#ff69b4';
+            ctx.beginPath();
+            ctx.moveTo(0, hitLineY);
+            ctx.lineTo(canvasWidth, hitLineY);
+            ctx.stroke();
+        }
+
+        function drawBricks() {
+            bricks.forEach(brick => {
+                ctx.fillStyle = colors[brick.col];
+                ctx.fillRect(brick.col * colWidth, brick.y, colWidth, brickHeight);
+                ctx.strokeStyle = '#000'; // 벽돌 테두리 색상 (검정색)
+                ctx.lineWidth = 1; // 벽돌 테두리 두께
+                ctx.strokeRect(brick.col * colWidth, brick.y, colWidth, brickHeight);
+            });
+        }
+
+        function updateBricks() {
+            for (let i = 0; i < bricks.length; i++) {
+                bricks[i].y += brickSpeed;
+                if (bricks[i].y + brickHeight > canvasHeight) {
+                    bricks.splice(i, 1);
+                    score -= 1;
+                    updateScore();
+                    i--;
+                }
+            }
+            if (Math.random() < 0.02) {
+                let col = Math.floor(Math.random() * numCols);
+                if (!isColFull(col)) {
+                    bricks.push({ col: col, y: -brickHeight });
+                }
+            }
+        }
+
+        function isColFull(col) {
+            for (let i = 0; i < bricks.length; i++) {
+                if (bricks[i].col === col && bricks[i].y < brickHeight) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -85,4 +254,4 @@
         
     </script>
 </body>
-</html>
+</html> -->
