@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,17 +34,38 @@
             font-size: 24px;
             text-align: center;
         }
+        .game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ff69b4;
+            font-size: 36px;
+            text-align: center;
+            display: none;
+        }
+        .hearts {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #ff69b4;
+            font-size: 24px;
+        }
     </style>
 </head>
 <body>
     <div class="score">Score: 0</div>
+    <div class="hearts">❤️❤️❤️❤️❤️</div>
     <div class="start-message">Press Space to Start</div>
+    <div class="game-over" id="gameOverMessage">Game Over<br>Score: 0</div>
     <canvas id="gameCanvas" width="360" height="640"></canvas>
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
         const scoreDisplay = document.querySelector('.score');
+        const heartsDisplay = document.querySelector('.hearts');
         const startMessage = document.querySelector('.start-message');
+        const gameOverMessage = document.getElementById('gameOverMessage');
 
         const canvasWidth = canvas.width;
         const canvasHeight = canvas.height;
@@ -57,6 +78,7 @@
         let bricks = [];
         let score = 0;
         let gameRunning = false;
+        let missCount = 0;
 
         const colors = ['#ff99c8', '#fcf6bd', '#d0f4de', '#a9def9'];
 
@@ -79,25 +101,52 @@
                 case 'KeyF': colIndex = 1; break;
                 case 'KeyJ': colIndex = 2; break;
                 case 'KeyK': colIndex = 3; break;
+                default: return; // 유효하지 않은 키 입력 시 아무 작업도 하지 않음
             }
             if (colIndex !== -1) {
+                let hit = false;
                 for (let i = 0; i < bricks.length; i++) {
                     if (bricks[i].col === colIndex && bricks[i].y + brickHeight >= hitLineY) {
                         bricks.splice(i, 1);
                         score += 1;
                         updateScore();
+                        hit = true;
                         break;
                     }
+                }
+                if (!hit) {
+                    missCount++; // 벽돌을 성공적으로 제거하지 못한 경우 감점
+                    score -= 1; // 점수 감소
+                    updateScore();
+                    updateHearts();
+                    checkGameOver();
                 }
             }
         }
 
         function updateScore() {
             scoreDisplay.textContent = `Score: ${score}`;
-            if (score % 10 === 0 && score !== 0) {
+            if (score % 10 === 0 && score > 0) {
                 brickSpeed += 0.1; // 각 점수 증가마다 속도를 조금씩 증가
                 console.log(`Speed increased: ${brickSpeed}`);
             }
+        }
+
+        function updateHearts() {
+            const hearts = '❤️'.repeat(5 - missCount);
+            heartsDisplay.textContent = hearts;
+        }
+
+        function checkGameOver() {
+            if (missCount >= 5) {
+                endGame();
+            }
+        }
+
+        function endGame() {
+            gameRunning = false;
+            gameOverMessage.innerHTML = `Game Over<br>Score: ${score}`;
+            gameOverMessage.style.display = 'block';
         }
 
         function gameLoop() {
@@ -132,8 +181,11 @@
                 bricks[i].y += brickSpeed;
                 if (bricks[i].y + brickHeight > canvasHeight) {
                     bricks.splice(i, 1);
-                    score -= 1;
+                    missCount++; // 벽돌이 캔버스 끝까지 닿으면 감점
+                    score -= 1; // 점수 감소
                     updateScore();
+                    updateHearts();
+                    checkGameOver();
                     i--;
                 }
             }
@@ -160,98 +212,3 @@
 
 
 
-
-
-
-
-
-
-
-<!-- <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test</title>
-    <style>
-        canvas{
-            background: #eee;
-        }
-    </style>
-</head>
-<body>
-    <div class="row">
-        <canvas class="canvas" width="100" height="770"></canvas>
-    </div>
-
-    <script>
-        const canvas = document.querySelector('.canvas');
-        const context = canvas.getContext('2d');
-        const boxes = [];
-        
-        
-        class Box {
-            constructor(x, y) {
-                this.x = x;
-                this.y = y;
-                this.draw();
-            }
-            draw() {
-                context.fillRect(this.x, this.y, 100, 20); // 넓이100, 두께20의 박스
-            }
-        }
-        
-        function render() {
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            context.fillStyle = 'rgba(255,0,0,0.05)';
-            context.fillRect(0, 500, 100,10); // safeline
-            for (let i=0; i<boxes.length; i++) {
-                context.fillStyle = 'rgba(255,0,0,0.8)';
-                box = boxes[i];
-                box.y += 7;
-                if (box.y >= 500) {
-                    document.addEventListener("keydown", onButton);
-                }
-                if (box.y > canvas.height) {
-                    boxes.shift();
-                }
-                box.draw();
-            }
-            requestAnimationFrame(render);
-        }
-        
-        
-        let tempX, tempY;
-
-        function update() {    
-            for (let i = 0; i < 1; i++) {
-                tempX = canvas.width * 0; // x축 랜덤 생성
-                tempY = canvas.height * 0; // y축 랜덤 생성
-                boxes.push(new Box(tempX, tempY));
-            }
-        }
-        function init() {
-            var my = function() {
-                update();
-                var rand = Math.round(Math.random() * (3000-500)+500)
-                setTimeout(my, rand);  
-            }
-        }
-        
-        // box.y 값을 가져와 키값이 입력될 때 마다 좌표 알아내기.
-        function onButton(e) { 
-            // 68 == "D" 32 == "space "
-            if (e.keyCode == 32) {
-                boxes.shift();
-            } 
-        }
-
-
-        render();
-        // document.addEventListener("keydown", onButton);
-        setInterval(update, 800)
-        
-    </script>
-</body>
-</html> -->
